@@ -1,9 +1,9 @@
 import React from "react";
 import { Title } from "./Title";
-import { MenuProps } from "./type";
-const Intro: React.FC<MenuProps> = ({ title, subtitle }) => {
+import { IntroProps } from "./type";
+const Intro: React.FC<IntroProps> = ({ title, subtitle }) => {
   return (
-    <section className="Menu">
+    <section className="Intro">
       <Title title={title} subtitle={subtitle} />
     </section>
   );

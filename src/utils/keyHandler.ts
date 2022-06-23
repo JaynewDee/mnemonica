@@ -8,8 +8,14 @@ class KeyHandler {
 
   type(event: KeyboardEvent) {
     switch (event.code) {
-      case this.SPACE:
+      case this.ENTER:
         return "begin";
+      case this.SPACE:
+        return "pause";
+      case this.DOWN:
+        return "down";
+      default:
+        break;
     }
   }
 }

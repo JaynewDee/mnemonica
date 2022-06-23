@@ -7,7 +7,6 @@ interface WindowState {
   intro: boolean;
   menu: boolean;
   events: any;
-  focusRef: React.RefObject<any>;
   settings: {
     level: [number, number];
     rehabilitation: boolean;

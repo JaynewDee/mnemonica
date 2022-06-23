@@ -1,4 +1,4 @@
-.Menu {
+.Intro {
   display: flex;
   flex-flow: column nowrap;
   height: 85%;
@@ -29,13 +29,52 @@
 }
 .instruction {
   opacity: 0;
-  animation: fadeOver 3s ease-in-out 3s forwards;
+  animation: fadeOver 3s ease-in-out 2s forwards;
+  margin-bottom: 3rem;
   .instruction-name {
     border: 1px solid black;
     border-radius: 3px;
     padding: 3px 6px;
     letter-spacing: 1px;
     font-weight: bolder;
+  }
+}
+
+.Menu {
+  position: absolute;
+  width: 66%;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  font-family: "Joan";
+
+  h3 {
+    margin: auto;
+  }
+  .menu-buttons {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 66%;
+    margin: auto;
+    button {
+      width: 66%;
+      margin: 1rem;
+      padding: 0.3rem 0;
+      background: none;
+      outline: none;
+      border: none;
+      filter: drop-shadow(0 0 1px black);
+    }
+    button:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 3px rgba(10, 10, 10, 0.5));
+    }
   }
 }
 

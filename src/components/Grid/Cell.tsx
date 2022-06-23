@@ -1,26 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IconType } from "react-icons";
 import { CellTypes } from "./type";
 
-const Cell: React.FC<CellTypes> = ({
-  img,
-  idx,
-  setGuess,
-}: {
-  img: any;
-  idx: number;
-  setGuess: any;
-}) => {
-  const [flipState, setFlip] = useState({ condition: false });
-
+const Cell: React.FC<CellTypes> = ({ img, idx, pairId, match, setMatch }) => {
+  const [flipState, setFlip] = useState({ condition: false, class: `cell` });
+  console.log(flipState);
   const manageGuess = (e: any) => {
-    console.log(e);
-    const { target } = e.target;
+    e.preventDefault();
+    console.log(e.target);
     if (flipState.condition === false) {
-      setGuess(e.target);
-      setFlip({ ...flipState, condition: !flipState.condition });
-    } else {
-      return;
+      setFlip({ condition: !flipState.condition, class: `cell cell-flipped` });
+    }
+    if (!match.first) {
+      setMatch({ type: "first", payload: pairId });
+    } else if (match.first && !match.second) {
+      setMatch({ type: "second", payload: pairId });
     }
   };
 
@@ -28,16 +22,12 @@ const Cell: React.FC<CellTypes> = ({
     <button
       id={`${idx}`}
       onClick={(e) => {
+        e.preventDefault();
         manageGuess(e);
       }}
-      style={{
-        animation: `flip .5s ease-in-out ${
-          3 + (idx / 2) * (idx / 100)
-        }s forwards`,
-      }}
-      className={flipState.condition ? `cell-flipped` : `cell`}
+      className={`${flipState.class}`}
     >
-      <div className="cell-icon">{img()}</div>
+      {img({ id: img.id, className: "r-icon" })}
     </button>
   );
 };

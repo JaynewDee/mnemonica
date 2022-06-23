@@ -4,39 +4,66 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 20px;
-  .cell {
+  transition: all 0.5s;
+  .cell-wrapper {
     display: flex;
-    justify-content: center;
     align-items: center;
-    animation: flip 1s ease-in-out 2s forwards;
-    background-color: white;
-    color: rgba(30, 30, 30, 0.6);
-    box-shadow: 0 0 8px rgba(10, 10, 10, 0.9);
-    transition: all 0.3s;
-    border: 2px rgb(150, 0, 0);
-    outline: 2px rgb(130, 0, 0);
-  }
-  .cell:hover {
-    transform: scale(1.07);
-    transition: all 0.3s;
-  }
-  .cell-flipped {
-    transform: scale(0.9);
-    box-shadow: inset 0px 5px 15px rgba(30, 30, 30, 0.5);
-    transition: all 0.3s;
-  }
-  .cell-flipped:hover {
-    transform: scale(0.9);
+    justify-content: center;
+    // animation: `flip .5s ease-in-out ${
+    //   3 + (idx / 2) * (idx / 100)
+    // }s forwards`
+    .cell {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 66%;
+      height: 66%;
+      background-color: white;
+      box-shadow: 0 1rem 20px rgba(10, 10, 10, 0.9);
+      transition: all 0.3s;
+      border: 2px rgb(150, 0, 0);
+      outline: 2px rgb(130, 0, 0);
+      pointer-events: none;
+      animation: flip 0.5s ease-in-out
+        calc(calc(attr(id) / 2) * calc(attr(id) / 100)) s;
+    }
+    .r-icon > * {
+      pointer-events: none;
+    }
+    .r-icon {
+      pointer-events: auto;
+    }
+    .cell:hover {
+      transform: scale(1.07);
+      transition: all 0.3s;
+    }
+
+    .cell-flipped {
+      transform: scale(0.93);
+      box-shadow: 0px 5px 15px rgba(30, 30, 30, 0.5);
+      background-color: white;
+      transition: all 0.3s;
+    }
+    .cell-solved {
+      transform: scale(0.93);
+      box-shadow: 0px 5px 15px rgba(30, 30, 30, 0.2);
+      background-color: white;
+      border-left: 3px solid green;
+      border-right: 3px solid green;
+      transition: all 0.3s;
+    }
+
+    .cell-flipped:hover {
+      transform: scale(0.9);
+    }
   }
 }
 
-@keyframes flip {
-  0% {
-  }
-  100% {
-    background-color: rgba(170, 0, 0, 1);
-    opacity: 0.85;
-    border-radius: 5px;
-  }
-}
+// @keyframes flip {
+//   0% {
+//   }
+//   100% {
+//     background-color: rgba(0, 0, 0, 1);
+//     border-radius: 5px;
+//   }
+// }

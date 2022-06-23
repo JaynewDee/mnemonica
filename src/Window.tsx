@@ -2,7 +2,7 @@ import React, { Component, createRef } from "react";
 import KeyHandler from "./utils/keyHandler";
 import { WindowProps, WindowState } from "./type";
 
-import { displaySwitch } from "./utils/render/switch";
+import { displaySwitch } from "./Switch";
 class Window extends Component<WindowProps, WindowState> {
   state: WindowState = {
     windowSize: [900, 600],
@@ -11,17 +11,13 @@ class Window extends Component<WindowProps, WindowState> {
     intro: true,
     menu: true,
     events: new KeyHandler(),
-    focusRef: createRef(),
     settings: {
       level: [0, 0],
       rehabilitation: false,
     },
   };
 
-  focusWindow = () => {
-    console.log(`focusWindow fired.`);
-    this.state.focusRef.current.focus();
-  };
+  focusRef: any = createRef();
 
   setSize = (size: [number, number]) => {
     this.setState(() => ({
@@ -34,36 +30,44 @@ class Window extends Component<WindowProps, WindowState> {
       intro: false,
     }));
   };
-
+  resume = () => {
+    this.setState(() => ({
+      menu: !this.state.menu,
+    }));
+  };
   handleEvent = (e: any) => {
     const action = this.state.events.type(e);
-    if (action === "begin") {
-      this.begin();
-    } else if (action === "play") {
-      // this.play()
+    switch (action) {
+      case "begin":
+        this.begin();
+        break;
+      case "play":
+        break;
+      case "pause":
+        this.resume();
+        break;
+      case "down":
+        break;
     }
   };
 
   componentDidMount = () => {
     window.addEventListener("keydown", (e) => {
+      console.log(e);
       this.handleEvent(e);
     });
   };
 
-  display = displaySwitch;
   render(): React.ReactNode {
     return (
       <article
-        onKeyDown={(e) => {
-          this.state.events.type(e);
-        }}
         style={{
           width: `${this.state.windowSize[0]}px`,
           height: `${this.state.windowSize[1]}px`,
         }}
         className="Window"
       >
-        {this.display(this.state)}
+        {displaySwitch(this.state, this.resume)}
       </article>
     );
   }
