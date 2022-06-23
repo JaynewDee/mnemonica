@@ -1,3 +1,6 @@
+@use "./components/Menu/Menu.scss";
+@use "./components/Grid/Grid.scss";
+
 .Window {
   background: rgba(240, 240, 240, 0.95);
   border-radius: 5px;
@@ -8,72 +11,4 @@
   justify-content: center;
   max-width: 80vw;
   margin: auto;
-  .four-by {
-    width: 66%;
-    height: 66%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    gap: 20px;
-    .cell {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      img {
-        transform: scale(2);
-      }
-    }
-  }
-  .Menu {
-    display: flex;
-    flex-flow: column nowrap;
-    height: 85%;
-    width: 100%;
-    pointer-events: none;
-    .Header {
-      margin: auto;
-      height: 66%;
-      width: 66%;
-      text-align: center;
-      font-size: 3rem;
-      letter-spacing: 7px;
-
-      .title {
-        margin: 4rem auto 3rem;
-        transform: perspective(8rem);
-        animation: fadeIn 2s ease-in-out 0.5s forwards;
-        opacity: 0;
-        filter: drop-shadow(0 8px 5px rgba(30, 30, 30, 0.6));
-      }
-      .subtitle {
-        margin: 1rem auto;
-        font-size: 0.88rem;
-        font-weight: lighter;
-        opacity: 0;
-        animation: fadeIn 2s ease-in-out 1s forwards;
-        letter-spacing: 5px;
-      }
-    }
-  }
-  .instruction {
-    opacity: 0;
-
-    animation: fadeIn 3s ease-in-out 3s forwards;
-    .instruction-name {
-      border: 1px solid black;
-      border-radius: 3px;
-      padding: 3px 6px;
-      letter-spacing: 1px;
-      font-weight: bolder;
-    }
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }

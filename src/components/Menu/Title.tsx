@@ -1,5 +1,4 @@
 import React from "react";
-import { Instruction } from "../Instruction";
 import { TitleProps } from "./type";
 const Title: React.FC<TitleProps> = ({ title, subtitle }) => {
   const splitTitle = (title: string) => {

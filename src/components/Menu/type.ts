@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 interface MenuProps {
   title: string;
   subtitle: string;
