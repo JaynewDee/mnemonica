@@ -2,33 +2,36 @@ import React, { useEffect, useState } from "react";
 import { IconType } from "react-icons";
 import { CellTypes } from "./type";
 
-const Cell: React.FC<CellTypes> = ({ img, idx, pairId, match, setMatch }) => {
-  const [flipState, setFlip] = useState({ condition: false, class: `cell` });
-  console.log(flipState);
+const Cell: React.FC<CellTypes> = ({
+  image,
+  uniqueId,
+  pairId,
+  classState,
+  gridState,
+  gridDispatch,
+}) => {
   const manageGuess = (e: any) => {
-    e.preventDefault();
     console.log(e.target);
-    if (flipState.condition === false) {
-      setFlip({ condition: !flipState.condition, class: `cell cell-flipped` });
-    }
-    if (!match.first) {
-      setMatch({ type: "first", payload: pairId });
-    } else if (match.first && !match.second) {
-      setMatch({ type: "second", payload: pairId });
+    if (gridState.turn === 1) {
+      gridDispatch({ type: "GUESS", payload: [uniqueId, 1, e.target.id] });
+    } else if (gridState.turn === 2) {
+      gridDispatch({ type: "GUESS", payload: [uniqueId, 1, e.target.id] });
     }
   };
 
   return (
-    <button
-      id={`${idx}`}
-      onClick={(e) => {
-        e.preventDefault();
-        manageGuess(e);
-      }}
-      className={`${flipState.class}`}
-    >
-      {img({ id: img.id, className: "r-icon" })}
-    </button>
+    <div key={(Math.random() * 100) % 3} className="cell-wrapper">
+      <button
+        id={`${pairId}`}
+        onClick={(e: any) => {
+          e.preventDefault();
+          manageGuess(e);
+        }}
+        className={classState}
+      >
+        {image({ color: "rgba(0,0,0,.75)" })}
+      </button>
+    </div>
   );
 };
 

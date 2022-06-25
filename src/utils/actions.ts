@@ -1,0 +1,5 @@
+const GUESS = "GUESS";
+const MATCH = "MATCH";
+const RESET_WRONG = "RESET_WRONG";
+const RESET_BOARD = "RESET_BOARD";
+export { GUESS, MATCH, RESET_WRONG, RESET_BOARD };

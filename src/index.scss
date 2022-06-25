@@ -32,3 +32,7 @@ code {
 button {
   font-family: $Stoke;
 }
+
+svg {
+  pointer-events: none;
+}

@@ -1,4 +1,4 @@
-import GridFrame from "./components/Grid/GridFrame";
+import Grid from "./components/Grid/Grid";
 import { Instruction } from "./components/Menu/Instruction";
 import { Intro } from "./components/Menu/Intro";
 import Menu from "./components/Menu/MenuFrame";
@@ -15,7 +15,7 @@ function displaySwitch(state: any, resumeFn: any) {
   } else {
     return (
       <>
-        <GridFrame menu={state.menu} />
+        <Grid menu={state.menu} images={state.images} />
         {menuSwitch(state.menu, resumeFn)}
       </>
     );

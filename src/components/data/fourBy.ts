@@ -6,41 +6,89 @@ import {
   GiHeraldicSun,
   GiAlienSkull,
   GiCaesar,
+  GiApolloCapsule,
 } from "react-icons/gi";
 
-import { FiSave } from "react-icons/fi";
 const memories = [
   {
     image: GiHummingbird,
-    id: 1,
+    pairId: 0,
+    class: `cell`,
   },
   {
     image: GiSunPriest,
-    id: 2,
+    pairId: 1,
+    class: `cell`,
   },
   {
     image: GiHeartburn,
-    id: 3,
+    pairId: 2,
+    class: `cell`,
   },
   {
-    image: FiSave,
-    id: 4,
+    image: GiApolloCapsule,
+    pairId: 3,
+    class: `cell`,
   },
   {
     image: GiFox,
-    id: 5,
+    pairId: 4,
+    class: `cell`,
   },
   {
     image: GiHeraldicSun,
-    id: 6,
+    pairId: 5,
+    class: `cell`,
   },
   {
     image: GiAlienSkull,
-    id: 7,
+    pairId: 6,
+    class: `cell`,
   },
   {
     image: GiCaesar,
-    id: 8,
+    pairId: 7,
+    class: `cell`,
+  },
+  {
+    image: GiHummingbird,
+    pairId: 0,
+    class: `cell`,
+  },
+  {
+    image: GiSunPriest,
+    pairId: 1,
+    class: `cell`,
+  },
+  {
+    image: GiHeartburn,
+    pairId: 2,
+    class: `cell`,
+  },
+  {
+    image: GiApolloCapsule,
+    pairId: 3,
+    class: `cell`,
+  },
+  {
+    image: GiFox,
+    pairId: 4,
+    class: `cell`,
+  },
+  {
+    image: GiHeraldicSun,
+    pairId: 5,
+    class: `cell`,
+  },
+  {
+    image: GiAlienSkull,
+    pairId: 6,
+    class: `cell`,
+  },
+  {
+    image: GiCaesar,
+    pairId: 7,
+    class: `cell`,
   },
 ];
 

@@ -1,8 +1,9 @@
 import React, { Component, createRef } from "react";
 import KeyHandler from "./utils/keyHandler";
 import { WindowProps, WindowState } from "./type";
-
+import { forgotten } from "./utils/forgetMemories";
 import { displaySwitch } from "./Switch";
+
 class Window extends Component<WindowProps, WindowState> {
   state: WindowState = {
     windowSize: [900, 600],
@@ -10,18 +11,24 @@ class Window extends Component<WindowProps, WindowState> {
     subtitle: `mnemosyne's trial`,
     intro: true,
     menu: true,
+    images: [],
     events: new KeyHandler(),
     settings: {
       level: [0, 0],
       rehabilitation: false,
     },
   };
-
   focusRef: any = createRef();
 
   setSize = (size: [number, number]) => {
     this.setState(() => ({
       windowSize: size,
+    }));
+  };
+
+  initializeFragments = () => {
+    this.setState(() => ({
+      images: forgotten,
     }));
   };
 
@@ -53,9 +60,9 @@ class Window extends Component<WindowProps, WindowState> {
 
   componentDidMount = () => {
     window.addEventListener("keydown", (e) => {
-      console.log(e);
       this.handleEvent(e);
     });
+    this.initializeFragments();
   };
 
   render(): React.ReactNode {

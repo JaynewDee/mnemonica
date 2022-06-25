@@ -6,6 +6,7 @@ interface WindowState {
   subtitle: string;
   intro: boolean;
   menu: boolean;
+  images: [];
   events: any;
   settings: {
     level: [number, number];
