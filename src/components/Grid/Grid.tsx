@@ -13,18 +13,19 @@ const Grid: React.FC<GridTypes> = ({ menu, images }) => {
     first: "",
     second: "",
   });
-  console.log(gridState);
   useEffect(() => {
     const { turn, first, second } = gridState;
     if (turn === 3 && first === second) {
       gridDispatch({ type: "MATCH", payload: second });
     } else if (turn === 3 && first !== second) {
-      gridDispatch({ type: "RESET_WRONG" });
+      setTimeout(() => {
+        gridDispatch({ type: "RESET_WRONG" });
+      }, 1000);
     }
   }, [gridState]);
 
   return (
-    <IconContext.Provider value={{ color: "rgba(0,0,0,.5)", size: "3rem" }}>
+    <IconContext.Provider value={{ color: "rgba(0,0,0,.75)", size: "3rem" }}>
       {gridState.loading ? (
         <p>Loading ...</p>
       ) : (

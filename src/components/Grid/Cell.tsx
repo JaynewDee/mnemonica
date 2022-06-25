@@ -11,7 +11,6 @@ const Cell: React.FC<CellTypes> = ({
   gridDispatch,
 }) => {
   const manageGuess = (e: any) => {
-    console.log(e.target);
     if (gridState.turn === 1) {
       gridDispatch({ type: "GUESS", payload: [uniqueId, 1, e.target.id] });
     } else if (gridState.turn === 2) {
@@ -28,6 +27,7 @@ const Cell: React.FC<CellTypes> = ({
           manageGuess(e);
         }}
         className={classState}
+        disabled={classState === `cell-solved` ? true : false}
       >
         {image({ color: "rgba(0,0,0,.75)" })}
       </button>

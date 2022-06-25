@@ -47,6 +47,7 @@ const gridReducer = (state: any, { type, payload }: any) => {
         images: updated,
       };
     }
+
     case RESET_WRONG: {
       const reset = state.images.map((img: any) => {
         if (img.class === `cell-flipped`) {
