@@ -9,7 +9,7 @@ import {
   GiApolloCapsule,
 } from "react-icons/gi";
 
-const memories = [
+const memoriesOneZero = [
   {
     image: GiHummingbird,
     pairId: 0,
@@ -92,4 +92,4 @@ const memories = [
   },
 ];
 
-export { memories };
+export { memoriesOneZero };

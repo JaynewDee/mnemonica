@@ -19,7 +19,7 @@ const Cell: React.FC<CellTypes> = ({
   };
 
   return (
-    <div key={(Math.random() * 100) % 3} className="cell-wrapper">
+    <div key={Math.random() * 1000} className="cell-wrapper">
       <button
         id={`${pairId}`}
         onClick={(e: any) => {
@@ -27,7 +27,11 @@ const Cell: React.FC<CellTypes> = ({
           manageGuess(e);
         }}
         className={classState}
-        disabled={classState === `cell-solved` ? true : false}
+        disabled={
+          classState === `cell-solved` || classState === `cell-flipped`
+            ? true
+            : false
+        }
       >
         {image({ color: "rgba(0,0,0,.75)" })}
       </button>

@@ -1,5 +1,5 @@
 import { stat } from "fs";
-import { GUESS, MATCH, RESET_WRONG } from "./actions";
+import { GUESS, MATCH, RESET_WRONG, COMPLETED } from "./actions";
 
 const gridReducer = (state: any, { type, payload }: any) => {
   const matchId = parseInt(payload);
@@ -45,6 +45,7 @@ const gridReducer = (state: any, { type, payload }: any) => {
         ...state,
         turn: 1,
         images: updated,
+        solved: state.solved + 1,
       };
     }
 
@@ -60,6 +61,20 @@ const gridReducer = (state: any, { type, payload }: any) => {
         ...state,
         turn: 1,
         images: reset,
+        vitality: state.vitality - payload,
+      };
+    }
+    case COMPLETED: {
+      const refreshed = state.images.map((img: any) => {
+        img.class = `cell`;
+      });
+      return {
+        images: refreshed,
+        turn: 1,
+        first: "",
+        second: "",
+        solved: 0,
+        ...state,
       };
     }
   }

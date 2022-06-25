@@ -1,22 +1,45 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+import Menu from "../Menu/MenuFrame";
 
-const PortalSleeve = (Page: React.FC) => {
-  class Sleeve extends Component {
-    componentDidMount = () => {
-      document.addEventListener("keydown", (e) => {
-        console.log(e);
-      });
-    };
+const PortalSleeve = (props: any) => (Page: React.FC<any>) => {
+  return React.memo(
+    class Sleeve extends Component<any, any> {
+      constructor(props: any) {
+        super(props);
+        this.state = {
+          menuState: false,
+        };
+      }
 
-    render() {
-      return (
-        <article className="portal-layout">
-          <Page />
-        </article>
-      );
+      toggleMenu = () => {
+        const newData = !this.state.menuState;
+        this.setState(() => ({
+          menuStatus: newData,
+        }));
+      };
+
+      componentDidMount = () => {
+        document.addEventListener("keydown", (e) => {
+          if (e.code === "Space") {
+            this.toggleMenu();
+          }
+        });
+      };
+
+      render() {
+        return (
+          <article className="portal-layout">
+            <Page
+              {...props}
+              menuStatus={this.state.menuState}
+              toggleMenu={this.toggleMenu}
+            />
+            {this.state.menuState ? <Menu /> : null}
+          </article>
+        );
+      }
     }
-  }
-  return Sleeve;
+  );
 };
 
 export { PortalSleeve };

@@ -1,10 +1,10 @@
 import React, { Component, createRef } from "react";
 import KeyHandler from "./utils/keyHandler";
 import { WindowProps, WindowState } from "./type";
-import { forgotten } from "./utils/forgetMemories";
+import { forgottenZeroZero, forgottenOneZero } from "./utils/forgetMemories";
 import { displaySwitch } from "./Switch";
-
-class Window extends React.PureComponent<WindowProps, WindowState> {
+console.log(forgottenZeroZero, `\n\n`);
+class Window extends React.Component<WindowProps, WindowState> {
   state: WindowState = {
     windowSize: [900, 600],
     title: `MNEMONICA`,
@@ -12,10 +12,8 @@ class Window extends React.PureComponent<WindowProps, WindowState> {
     intro: true,
     images: [],
     events: new KeyHandler(),
-    settings: {
-      level: [0, 0],
-      rehabilitation: false,
-    },
+    level: [0, 0],
+    rehabilitation: false,
   };
   focusRef: any = createRef();
 
@@ -25,11 +23,7 @@ class Window extends React.PureComponent<WindowProps, WindowState> {
     }));
   };
 
-  initializeFragments = () => {
-    this.setState(() => ({
-      images: forgotten,
-    }));
-  };
+  initializeFragments = () => {};
 
   begin = () => {
     this.setState(() => ({
@@ -45,25 +39,38 @@ class Window extends React.PureComponent<WindowProps, WindowState> {
         break;
       case "play":
         break;
-      case "pause":
-        break;
       case "down":
         break;
       default:
         break;
     }
   };
-
+  setLevel = () => {
+    const newLevel = this.state.level[0] + 1;
+    this.setState(() => ({
+      level: [newLevel, 0],
+    }));
+  };
+  nextRound = () => {
+    if (this.state.level === [1, 0]) {
+      this.setState(() => ({
+        images: forgottenOneZero,
+      }));
+    } else {
+      this.setState(() => ({
+        images: forgottenZeroZero,
+      }));
+    }
+  };
   componentDidMount = () => {
-    console.log(`Window component mounted`);
+    console.log(`WINDOW MOUNTED`);
     document.addEventListener("keydown", (e) => {
       this.handleEvent(e);
     });
-    this.initializeFragments();
   };
 
   render(): React.ReactNode {
-    console.log(`Window component rendered`);
+    console.log(`WINDOW RENDERED`);
     return (
       <article
         style={{
@@ -72,7 +79,7 @@ class Window extends React.PureComponent<WindowProps, WindowState> {
         }}
         className="Window"
       >
-        {displaySwitch(this.state)}
+        {displaySwitch(this.state, this.setLevel)}
       </article>
     );
   }

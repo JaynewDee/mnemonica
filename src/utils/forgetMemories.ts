@@ -1,4 +1,6 @@
-import { memories } from "../components/data/fourBy";
+import { memoriesOneZero } from "../components/data/fourBy";
+import { memoriesZeroZero } from "../components/data/threeBy";
+
 function index(array: any) {
   let uniques = array.map((item: any) => {
     item.uniqueId = Math.round(Math.random() * 10000);
@@ -21,5 +23,6 @@ function forget(cardArray: any) {
   return amnesia;
 }
 
-const forgotten = forget(memories);
-export { forgotten };
+const forgottenZeroZero = forget(memoriesZeroZero);
+const forgottenOneZero = forget(memoriesOneZero);
+export { forgottenZeroZero, forgottenOneZero };

@@ -1,3 +1,4 @@
+import { SetStateAction } from "react";
 import { IconType } from "react-icons";
 
 export interface CellTypes {
@@ -12,4 +13,5 @@ export interface CellTypes {
 export interface GridTypes {
   menu: boolean;
   images: [];
+  setLevel: SetStateAction<any>;
 }

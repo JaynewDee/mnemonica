@@ -7,10 +7,8 @@ interface WindowState {
   intro: boolean;
   images: [];
   events: any;
-  settings: {
-    level: [number, number];
-    rehabilitation: boolean;
-  };
+  level: [number, number];
+  rehabilitation: boolean;
 }
 
 interface WindowProps {}
