@@ -6,10 +6,6 @@ interface TitleProps {
   title: string;
   subtitle: string;
 }
-interface MenuProps {
-  resume: any;
-}
-interface PauseProps {
-  resume: any;
-}
+interface MenuProps {}
+interface PauseProps {}
 export type { IntroProps, TitleProps, MenuProps, PauseProps };

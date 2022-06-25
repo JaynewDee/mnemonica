@@ -64,4 +64,4 @@ const Grid: React.FC<GridTypes> = ({ menu, images }) => {
   );
 };
 
-export default Grid;
+export default React.memo(Grid);

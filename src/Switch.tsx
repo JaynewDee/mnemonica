@@ -3,28 +3,28 @@ import { Instruction } from "./components/Menu/Instruction";
 import { Intro } from "./components/Menu/Intro";
 import Menu from "./components/Menu/MenuFrame";
 
-function displaySwitch(state: any, resumeFn: any) {
-  let intro = state.intro;
+function displaySwitch({ title, subtitle, intro, menu, images }: any) {
   if (intro) {
     return (
       <>
-        <Intro title={state.title} subtitle={state.subtitle} />
+        <Intro title={title} subtitle={subtitle} />
         <Instruction />
       </>
     );
   } else {
     return (
       <>
-        <Grid menu={state.menu} images={state.images} />
-        {menuSwitch(state.menu, resumeFn)}
+        <Grid menu={menu} images={images} />
+        {menuSwitch(menu)}
       </>
     );
   }
 }
 
-function menuSwitch(menuState: any, resumeFn: any) {
-  if (menuState) {
-    return <Menu resume={resumeFn} />;
+function menuSwitch(menu: any) {
+  console.log(menu);
+  if (menu) {
+    return <Menu />;
   }
 }
 

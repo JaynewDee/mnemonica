@@ -1,16 +1,11 @@
 import React from "react";
 import { PauseProps } from "./type";
-const Pause: React.FC<PauseProps> = ({ resume }) => {
+const Pause: React.FC<PauseProps> = ({}) => {
+  console.log(`Pause component mounted`);
   return (
     <>
-      <h3
-        style={{ letterSpacing: `3px`, fontSize: `1.33rem` }}
-      >{`  |   MENU   |  `}</h3>
       <div className="menu-buttons">
-        <button
-          onKeyDown={(e) => (e.key === "Space" ? resume() : null)}
-          onClick={(e) => resume()}
-        >
+        <button autoFocus={true} className="resume-btn">
           RESUME
         </button>
         <button>SETTINGS</button>

@@ -5,7 +5,6 @@ interface WindowState {
   title: string;
   subtitle: string;
   intro: boolean;
-  menu: boolean;
   images: [];
   events: any;
   settings: {

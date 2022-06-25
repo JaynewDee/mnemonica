@@ -4,13 +4,12 @@ import { WindowProps, WindowState } from "./type";
 import { forgotten } from "./utils/forgetMemories";
 import { displaySwitch } from "./Switch";
 
-class Window extends Component<WindowProps, WindowState> {
+class Window extends React.PureComponent<WindowProps, WindowState> {
   state: WindowState = {
     windowSize: [900, 600],
     title: `MNEMONICA`,
     subtitle: `mnemosyne's trial`,
     intro: true,
-    menu: true,
     images: [],
     events: new KeyHandler(),
     settings: {
@@ -37,13 +36,9 @@ class Window extends Component<WindowProps, WindowState> {
       intro: false,
     }));
   };
-  resume = () => {
-    this.setState(() => ({
-      menu: !this.state.menu,
-    }));
-  };
+
   handleEvent = (e: any) => {
-    const action = this.state.events.type(e);
+    const action = this.state.events.typeInput(e);
     switch (action) {
       case "begin":
         this.begin();
@@ -51,21 +46,24 @@ class Window extends Component<WindowProps, WindowState> {
       case "play":
         break;
       case "pause":
-        this.resume();
         break;
       case "down":
+        break;
+      default:
         break;
     }
   };
 
   componentDidMount = () => {
-    window.addEventListener("keydown", (e) => {
+    console.log(`Window component mounted`);
+    document.addEventListener("keydown", (e) => {
       this.handleEvent(e);
     });
     this.initializeFragments();
   };
 
   render(): React.ReactNode {
+    console.log(`Window component rendered`);
     return (
       <article
         style={{
@@ -74,7 +72,7 @@ class Window extends Component<WindowProps, WindowState> {
         }}
         className="Window"
       >
-        {displaySwitch(this.state, this.resume)}
+        {displaySwitch(this.state)}
       </article>
     );
   }

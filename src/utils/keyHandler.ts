@@ -6,7 +6,7 @@ class KeyHandler {
   LEFT = "ArrowLeft" || "KeyA";
   RIGHT = "ArrowRight" || "KeyD";
 
-  type(event: KeyboardEvent) {
+  typeInput(event: KeyboardEvent) {
     switch (event.code) {
       case this.ENTER:
         return "begin";
