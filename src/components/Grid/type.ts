@@ -5,13 +5,12 @@ export interface CellTypes {
   image: IconType;
   pairId: number;
   uniqueId: number;
-  onClick: any;
   classState: string;
-  gridState: any;
+  turn: number;
   gridDispatch: any;
 }
 export interface GridTypes {
-  menu: boolean;
-  images: [];
-  setLevel: SetStateAction<any>;
+  menuState: boolean;
+  images: [] | any;
+  level: number[];
 }

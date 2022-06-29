@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import { GUESS, MATCH, RESET_WRONG, COMPLETED } from "./actions";
 
 const gridReducer = (state: any, { type, payload }: any) => {
@@ -7,6 +6,7 @@ const gridReducer = (state: any, { type, payload }: any) => {
     case GUESS:
       {
         const guess = payload[2];
+        console.log(guess);
         const uniqueId = parseInt(payload[0]);
         const updated = state.images.map((img: any) => {
           if (img.uniqueId === uniqueId) {
@@ -14,6 +14,23 @@ const gridReducer = (state: any, { type, payload }: any) => {
           }
           return img;
         });
+        if (guess === `boost`) {
+          const updated = state.images.map((img: any) => {
+            if (img.uniqueId === `boost`) {
+              img.class = `boost-flipped`;
+            } else if (img.class === `cell-flipped`) {
+              img.class = `cell`;
+            }
+            return img;
+          });
+          return {
+            ...state,
+            first: "",
+            second: "",
+            turn: 1,
+            images: updated,
+          };
+        }
         if (state.turn === 1) {
           return {
             ...state,
@@ -32,7 +49,6 @@ const gridReducer = (state: any, { type, payload }: any) => {
       }
       break;
     case MATCH: {
-      // Replace css class of matched images
       const updated = state.images.map((img: any) => {
         if (img.pairId === matchId) {
           img.class = `cell-solved`;
@@ -40,7 +56,6 @@ const gridReducer = (state: any, { type, payload }: any) => {
         return img;
       });
 
-      // return new state object
       return {
         ...state,
         turn: 1,
@@ -67,6 +82,7 @@ const gridReducer = (state: any, { type, payload }: any) => {
     case COMPLETED: {
       const refreshed = state.images.map((img: any) => {
         img.class = `cell`;
+        return img;
       });
       return {
         images: refreshed,

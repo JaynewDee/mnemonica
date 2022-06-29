@@ -1,19 +1,17 @@
 import React, { Component, createRef } from "react";
 import KeyHandler from "./utils/keyHandler";
 import { WindowProps, WindowState } from "./type";
-import { forgottenZeroZero, forgottenOneZero } from "./utils/forgetMemories";
-import { displaySwitch } from "./Switch";
-console.log(forgottenZeroZero, `\n\n`);
+import { Intro } from "./components/Menu/Intro";
+import { Instruction } from "./components/Menu/Instruction";
+import Game from "./Game";
+
 class Window extends React.Component<WindowProps, WindowState> {
   state: WindowState = {
     windowSize: [900, 600],
     title: `MNEMONICA`,
     subtitle: `mnemosyne's trial`,
     intro: true,
-    images: [],
     events: new KeyHandler(),
-    level: [0, 0],
-    rehabilitation: false,
   };
   focusRef: any = createRef();
 
@@ -22,8 +20,6 @@ class Window extends React.Component<WindowProps, WindowState> {
       windowSize: size,
     }));
   };
-
-  initializeFragments = () => {};
 
   begin = () => {
     this.setState(() => ({
@@ -36,6 +32,9 @@ class Window extends React.Component<WindowProps, WindowState> {
     switch (action) {
       case "begin":
         this.begin();
+        document.removeEventListener("keydown", (e) => {
+          this.handleEvent(e);
+        });
         break;
       case "play":
         break;
@@ -45,23 +44,7 @@ class Window extends React.Component<WindowProps, WindowState> {
         break;
     }
   };
-  setLevel = () => {
-    const newLevel = this.state.level[0] + 1;
-    this.setState(() => ({
-      level: [newLevel, 0],
-    }));
-  };
-  nextRound = () => {
-    if (this.state.level === [1, 0]) {
-      this.setState(() => ({
-        images: forgottenOneZero,
-      }));
-    } else {
-      this.setState(() => ({
-        images: forgottenZeroZero,
-      }));
-    }
-  };
+
   componentDidMount = () => {
     console.log(`WINDOW MOUNTED`);
     document.addEventListener("keydown", (e) => {
@@ -79,7 +62,14 @@ class Window extends React.Component<WindowProps, WindowState> {
         }}
         className="Window"
       >
-        {displaySwitch(this.state, this.setLevel)}
+        {this.state.intro ? (
+          <>
+            <Intro title={this.state.title} subtitle={this.state.subtitle} />
+            <Instruction />
+          </>
+        ) : (
+          <Game />
+        )}
       </article>
     );
   }

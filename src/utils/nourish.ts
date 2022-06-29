@@ -1,7 +1,9 @@
 import { FaBeer } from "react-icons/fa";
 
-const nourish = ({ level }: any, imagesArray: any) => {
-  switch (level) {
-    case (level = [0, 0]):
-  }
+const nourish = (imagesArray: any, powerups: any) => {
+  const newArray = [...imagesArray, ...powerups];
+  console.log(newArray);
+  return newArray;
 };
+
+export { nourish };

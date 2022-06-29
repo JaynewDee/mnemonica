@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import Pause from "./Pause";
 import { MenuProps } from "./type";
-const Menu: React.FC<MenuProps> = ({}) => {
+
+const menuRoot = document.getElementById("menu-root");
+const Menu: React.FC<MenuProps> = () => {
   console.log(`Menu component mounted`);
-  useEffect(() => {
-    document.addEventListener("keydown", (e) => {
-      console.log(e);
-    });
-  });
-  return (
+  const [container, setContainer] = useState<any>(menuRoot);
+  return ReactDOM.createPortal(
     <>
       <section onKeyDown={(e) => {}} className="Menu">
         <h3
@@ -16,7 +15,8 @@ const Menu: React.FC<MenuProps> = ({}) => {
         >{`  |   MENU   |  `}</h3>
         <Pause />
       </section>
-    </>
+    </>,
+    container
   );
 };
 

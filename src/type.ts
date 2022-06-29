@@ -5,10 +5,7 @@ interface WindowState {
   title: string;
   subtitle: string;
   intro: boolean;
-  images: [];
   events: any;
-  level: [number, number];
-  rehabilitation: boolean;
 }
 
 interface WindowProps {}

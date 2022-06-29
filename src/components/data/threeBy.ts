@@ -20,7 +20,6 @@ const memoriesZeroZero = [
     pairId: 1,
     class: `cell`,
   },
-
   {
     image: GiFox,
     pairId: 4,
