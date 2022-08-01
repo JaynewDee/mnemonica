@@ -9,7 +9,7 @@ function index(array: any) {
   return uniques;
 }
 
-function shuffle(array: any) {
+export function shuffle(array: any) {
   let shuffled = array
     .map((value: any) => ({ value, sort: Math.random() }))
     .sort((a: { sort: number }, b: { sort: number }) => a.sort - b.sort)

@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { createRef } from "react";
 import KeyHandler from "./utils/keyHandler";
 import { WindowProps, WindowState } from "./type";
 import { Intro } from "./components/Menu/Intro";

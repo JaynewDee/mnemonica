@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Grid from "./components/Grid/Grid";
 import { forgottenZeroZero, forgottenOneZero } from "./utils/forgetMemories";
 import { nourish } from "./utils/nourish";
-
+import { shuffle } from "./utils/forgetMemories";
 import { FaBeer } from "react-icons/fa";
 interface GameProps {}
 const powerups = [
@@ -17,7 +17,7 @@ const nourished = nourish(forgottenZeroZero, powerups);
 const Game: React.FC<GameProps> = () => {
   const [gameState, setGameState] = useState({
     level: [0, 0],
-    images: nourished,
+    images: shuffle(nourished),
   });
   const [menuState, setMenuState] = useState(false);
 
