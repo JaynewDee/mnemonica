@@ -1,8 +1,5 @@
-import { FaBeer } from "react-icons/fa";
-
-const nourish = (imagesArray: any, powerups: any) => {
-  const newArray = [...imagesArray, ...powerups];
-  console.log(newArray);
+const nourish = (imageTiles: any, powerups: any) => {
+  const newArray = [...imageTiles, ...powerups];
   return newArray;
 };
 

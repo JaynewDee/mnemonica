@@ -80,6 +80,7 @@ const gridReducer = (state: any, { type, payload }: any) => {
       };
     }
     case COMPLETED: {
+      console.log("@ COMPLETED reducer");
       const refreshed = state.images.map((img: any) => {
         img.class = `cell`;
         return img;

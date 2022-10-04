@@ -6,7 +6,6 @@ import { GridTypes } from "./type";
 import { gridReducer } from "../../utils/reducers";
 
 const Grid: React.FC<GridTypes> = ({ menuState, images }) => {
-  console.log(`Grid component rendered`);
   const [gridState, gridDispatch] = useReducer(gridReducer, {
     images: images,
     turn: 1,
@@ -38,7 +37,7 @@ const Grid: React.FC<GridTypes> = ({ menuState, images }) => {
       {gridState.loading ? (
         <p>Loading ...</p>
       ) : (
-        <article key={"grid0,0"} className="grid-size">
+        <article className="grid-size">
           {gridState.images.map(
             (
               memory: {

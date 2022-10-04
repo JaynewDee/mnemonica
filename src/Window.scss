@@ -1,6 +1,5 @@
 @use "./components/Menu/Menu.scss";
 @use "./components/Grid/Grid.scss";
-@use "./components/Layout/Portal.scss";
 .Window {
   background: rgba(240, 240, 240, 0.95);
   border-radius: 5px;
@@ -8,7 +7,7 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   max-width: 80vw;
   margin: auto;
   font-family: "Joan";

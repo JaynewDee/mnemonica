@@ -9,18 +9,18 @@ function index(array: any) {
   return uniques;
 }
 
+function forget(cardArray: any) {
+  let indexed = index(cardArray);
+  let amnesia = shuffle(indexed);
+  return amnesia;
+}
+
 export function shuffle(array: any) {
   let shuffled = array
     .map((value: any) => ({ value, sort: Math.random() }))
     .sort((a: { sort: number }, b: { sort: number }) => a.sort - b.sort)
     .map(({ value }: { value: any }) => value);
   return shuffled;
-}
-
-function forget(cardArray: any) {
-  let indexed = index(cardArray);
-  let amnesia = shuffle(indexed);
-  return amnesia;
 }
 
 const forgottenZeroZero = forget(memoriesZeroZero);

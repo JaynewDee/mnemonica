@@ -21,13 +21,13 @@ const Game: React.FC<GameProps> = () => {
   });
   const [menuState, setMenuState] = useState(false);
 
-  useMemo(() => {
+  useEffect(() => {
     document.addEventListener("keydown", (e) => {
       if (e.code === "Space") {
         setMenuState(!menuState);
       }
     });
-  }, [menuState]);
+  }, []);
 
   return (
     <>
