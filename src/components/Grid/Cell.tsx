@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { IconType } from "react-icons";
+import React from "react";
 import { CellTypes } from "./type";
 
 const Cell: React.FC<CellTypes> = ({
@@ -7,7 +6,6 @@ const Cell: React.FC<CellTypes> = ({
   uniqueId,
   pairId,
   classState,
-  turn,
   gridDispatch,
 }) => {
   const manageGuess = (e: any) => {

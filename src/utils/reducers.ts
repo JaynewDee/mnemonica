@@ -6,7 +6,6 @@ const gridReducer = (state: any, { type, payload }: any) => {
     case GUESS:
       {
         const guess = payload[2];
-        console.log(guess);
         const uniqueId = parseInt(payload[0]);
         const updated = state.images.map((img: any) => {
           if (img.uniqueId === uniqueId) {
@@ -80,7 +79,6 @@ const gridReducer = (state: any, { type, payload }: any) => {
       };
     }
     case COMPLETED: {
-      console.log("@ COMPLETED reducer");
       const refreshed = state.images.map((img: any) => {
         img.class = `cell`;
         return img;

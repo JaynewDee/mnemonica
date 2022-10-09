@@ -1,11 +1,4 @@
-import React, {
-  useContext,
-  createContext,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-} from "react";
+import React, { useContext, createContext, useState, useMemo } from "react";
 
 const UserContext = createContext({});
 const useUserContext = () => {
@@ -21,7 +14,7 @@ const UserContextProvider = ({ children }: { children: any }) => {
   });
   const [theme, setTheme] = useState<any>(`blue`);
 
-  const Context = useMemo(
+  const context = useMemo(
     () => ({
       user,
       theme,
@@ -30,7 +23,9 @@ const UserContextProvider = ({ children }: { children: any }) => {
     }),
     [user, theme]
   );
-  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={context}>{children}</UserContext.Provider>
+  );
 };
 
 export { useUserContext, UserContextProvider };

@@ -2,11 +2,7 @@ import {
   GiHummingbird,
   GiSunPriest,
   GiFox,
-  GiHeartburn,
   GiHeraldicSun,
-  GiAlienSkull,
-  GiCaesar,
-  GiApolloCapsule,
 } from "react-icons/gi";
 
 const memoriesZeroZero = [

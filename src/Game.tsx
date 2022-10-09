@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "./components/Grid/Grid";
-import { forgottenZeroZero, forgottenOneZero } from "./utils/forgetMemories";
+import { forgottenZeroZero } from "./utils/forgetMemories";
 import { nourish } from "./utils/nourish";
 import { shuffle } from "./utils/forgetMemories";
 import { FaBeer } from "react-icons/fa";
