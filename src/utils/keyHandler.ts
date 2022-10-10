@@ -15,7 +15,7 @@ class KeyHandler {
       case this.DOWN:
         return "down";
       default:
-        break;
+        return undefined;
     }
   }
 }
