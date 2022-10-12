@@ -9,13 +9,14 @@ const Cell: React.FC<CellTypes> = ({
   gridDispatch,
 }) => {
   const manageGuess = (e: any) => {
+    console.log(uniqueId);
     gridDispatch({ type: "GUESS", payload: [uniqueId, 1, e.target.id] });
   };
 
   return (
     <div key={uniqueId * 100} className="cell-wrapper">
       <button
-        key={uniqueId * uniqueId}
+        key={uniqueId}
         id={`${pairId}`}
         onClick={(e: any) => {
           e.preventDefault();

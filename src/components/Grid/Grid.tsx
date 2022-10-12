@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer } from "react";
 import Cell from "./Cell";
 
-import { IconContext, IconType } from "react-icons";
-import { GridTypes } from "./type";
+import { IconContext } from "react-icons";
+import { GridTypes, MemoryType } from "./type";
 import { gridReducer } from "../../utils/reducers";
 
 const Grid: React.FC<GridTypes> = ({ menuState, images }) => {
@@ -21,7 +21,7 @@ const Grid: React.FC<GridTypes> = ({ menuState, images }) => {
       gridDispatch({ type: "MATCH", payload: second });
     } else if (turn === 3 && first !== second) {
       setTimeout(() => {
-        gridDispatch({ type: "RESET_WRONG", payload: 5 });
+        gridDispatch({ type: "RESET_WRONG" });
       }, 100);
     }
   }, [gridState]);
@@ -38,29 +38,19 @@ const Grid: React.FC<GridTypes> = ({ menuState, images }) => {
         <p>Loading ...</p>
       ) : (
         <article className="grid-size">
-          {gridState.images.map(
-            (
-              memory: {
-                image: IconType;
-                pairId: number;
-                class: string;
-                uniqueId: number;
-              },
-              index: number
-            ) => {
-              return (
-                <Cell
-                  turn={gridState.turn}
-                  pairId={memory.pairId}
-                  uniqueId={memory.uniqueId}
-                  classState={memory.class}
-                  image={memory.image}
-                  gridDispatch={gridDispatch}
-                  key={index}
-                />
-              );
-            }
-          )}
+          {gridState.images.map((memory: MemoryType, index: number) => {
+            return (
+              <Cell
+                turn={gridState.turn}
+                pairId={memory.pairId}
+                uniqueId={memory.uniqueId}
+                classState={memory.class}
+                image={memory.image}
+                gridDispatch={gridDispatch}
+                key={index}
+              />
+            );
+          })}
         </article>
       )}
     </IconContext.Provider>

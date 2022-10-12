@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Grid from "./components/Grid/Grid";
 import { forgottenZeroZero } from "./utils/forgetMemories";
 import { nourish } from "./utils/nourish";
@@ -16,18 +16,10 @@ const powerups = [
 const nourished = nourish(forgottenZeroZero, powerups);
 const Game: React.FC<GameProps> = () => {
   const [gameState, setGameState] = useState({
-    level: [0, 0],
+    level: [1, 1],
     images: shuffle(nourished),
   });
   const [menuState, setMenuState] = useState(false);
-
-  useEffect(() => {
-    document.addEventListener("keydown", (e) => {
-      if (e.code === "Space") {
-        setMenuState(!menuState);
-      }
-    });
-  }, []);
 
   return (
     <>

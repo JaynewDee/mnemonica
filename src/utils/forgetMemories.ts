@@ -1,9 +1,10 @@
 import { memoriesOneZero } from "../components/data/fourBy";
 import { memoriesZeroZero } from "../components/data/threeBy";
+import { nanoid } from "nanoid";
 
 function index(array: any) {
   const uniques = array.map((item: any) => {
-    item.uniqueId = Math.round(Math.random() * 10000);
+    item.uniqueId = nanoid();
     return item;
   });
   return uniques;
