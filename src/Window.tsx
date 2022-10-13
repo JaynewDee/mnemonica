@@ -17,7 +17,7 @@ const Window: React.FC = () => {
   });
 
   useEffect(() => {
-    document.addEventListener("keydown", (e) => {
+    window.addEventListener("keydown", (e) => {
       handleEvent(e);
     });
   });
@@ -27,9 +27,7 @@ const Window: React.FC = () => {
       ...windowState,
       intro: false,
     });
-    document.removeEventListener("keydown", (e) => {
-      handleEvent(e);
-    });
+    window.removeEventListener("keydown", handleEvent);
   };
 
   const handleEvent = (e: any) => {
