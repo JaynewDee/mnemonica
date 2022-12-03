@@ -1,13 +1,6 @@
-<<<<<<< Updated upstream
 import React, { Component, createRef } from "react";
 import KeyHandler from "./utils/keyHandler";
 import { WindowProps, WindowState } from "./type";
-=======
-import React, { useEffect, useState } from "react";
-import { Intro } from "./components/Menu/Intro";
-import { Instruction } from "./components/Menu/Instruction";
-import Game from "./Game";
->>>>>>> Stashed changes
 
 import { displaySwitch } from "./utils/render/switch";
 class Window extends Component<WindowProps, WindowState> {
