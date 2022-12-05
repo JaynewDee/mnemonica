@@ -1,6 +1,7 @@
 import { WindowProps, WindowState } from "./type";
 import React, { useEffect, useState } from "react";
 import { Intro } from "./components/Intro/Intro";
+
 const META = {
   title: `MNEMONICA`,
   subtitle: `mnemosyne's trial`
@@ -17,10 +18,6 @@ const Window = () => {
     }
   });
 
-  const focusWindow = () => {
-    console.log(`focusWindow fired.`);
-  };
-
   const setSize = (size: [number, number]) =>
     setWindowState((prev) => {
       return {
@@ -29,25 +26,35 @@ const Window = () => {
       };
     });
 
-  const begin = () => {
-    setWindowState(() => {
-      return {
-        ...windowState,
-        intro: false
-      };
-    });
-  };
+  useEffect(() => {
+    const begin = () => {
+      setWindowState(() => {
+        return {
+          ...windowState,
+          intro: false
+        };
+      });
+    };
+    const onKeyDown = (e: any) =>
+      e.key === " " ? begin() : console.log(e.key);
+    const mountListener = () => window.addEventListener("keydown", onKeyDown);
+    mountListener();
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [windowState]);
 
   return (
     <article
-      onKeyDown={(e) => {}}
       style={{
         width: `${windowState.windowSize[0]}px`,
         height: `${windowState.windowSize[1]}px`
       }}
       className="Window"
     >
-      <Intro title={META.title} subtitle={META.subtitle} />
+      {windowState.intro ? (
+        <Intro title={META.title} subtitle={META.subtitle} />
+      ) : (
+        <div></div>
+      )}
     </article>
   );
 };
