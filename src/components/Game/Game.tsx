@@ -1,14 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Menu from "./Menu/Menu";
+import "./Game.scss";
+const Game = () => {
+  const [gameState, setGameState] = useState({
+    paused: true
+  });
 
-const Game = ({ pause }: any) => {
+  const pause = () =>
+    setGameState(() => {
+      return {
+        ...gameState,
+        paused: !gameState.paused
+      };
+    });
+
   useEffect(() => {
     const onKeyDown = (e: any) =>
-      e.key === " " ? pause("menu") : console.log(e.key);
+      e.key === " "
+        ? setGameState(() => {
+            return { ...gameState, paused: !gameState.paused };
+          })
+        : null;
     const mountListener = () => window.addEventListener("keydown", onKeyDown);
     mountListener();
     return () => window.removeEventListener("keydown", onKeyDown);
   });
-  return <div>Game</div>;
+  return (
+    <div>
+      <div>{gameState.paused ? <Menu pause={pause} /> : <div></div>}</div>
+    </div>
+  );
 };
 
 export default Game;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Intro } from "./Intro/Intro";
 import { WindowState } from "../type";
-import Menu from "./Menu/Menu";
+import Menu from "./Game/Menu/Menu";
 import Game from "./Game/Game";
 
 const DisplaySwitch = (windowState: WindowState, pause: Function) => {
@@ -9,10 +9,8 @@ const DisplaySwitch = (windowState: WindowState, pause: Function) => {
 
   return currentDisplay === "intro" ? (
     <Intro title={title} subtitle={subtitle} start={pause} />
-  ) : currentDisplay === "menu" ? (
-    <Menu pause={pause} />
   ) : currentDisplay === "game" ? (
-    <Game pause={pause} />
+    <Game />
   ) : (
     <div>Future Display</div>
   );
