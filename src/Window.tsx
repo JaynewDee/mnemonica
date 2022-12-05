@@ -25,22 +25,15 @@ const Window = () => {
       };
     });
 
-  const start = () => {
+  const pause = (displayState: string) => {
     setWindowState(() => {
       return {
         ...windowState,
-        currentDisplay: "menu"
+        currentDisplay: displayState
       };
     });
   };
 
-  useEffect(() => {
-    const onKeyDown = (e: any) =>
-      e.key === " " ? start() : console.log(e.key);
-    const mountListener = () => window.addEventListener("keydown", onKeyDown);
-    mountListener();
-    return () => window.removeEventListener("keydown", onKeyDown);
-  });
   return (
     <article
       style={{
@@ -49,7 +42,7 @@ const Window = () => {
       }}
       className="Window"
     >
-      {DisplaySwitch(windowState)()}
+      {DisplaySwitch(windowState, pause)}
     </article>
   );
 };

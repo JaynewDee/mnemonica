@@ -10,10 +10,6 @@ const Cell: React.FC<CellTypes> = ({
   idx: number;
   setGuess: any;
 }) => {
-  // const manageGuess = (e: any) => {
-  //   console.log(e);
-  // };
-
   return <button></button>;
 };
 
