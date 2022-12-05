@@ -1,13 +1,10 @@
 import React from "react";
 
 interface WindowState {
-  windowSize: [number, number];
   title: string;
   subtitle: string;
-  intro: boolean;
-  menu: boolean;
-  events: any;
-  focusRef: React.RefObject<any>;
+  windowSize: [number, number];
+  currentDisplay: any;
   settings: {
     level: [number, number];
     rehabilitation: boolean;

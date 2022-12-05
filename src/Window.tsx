@@ -1,17 +1,16 @@
 import { WindowProps, WindowState } from "./type";
 import React, { useEffect, useState } from "react";
 import { Intro } from "./components/Intro/Intro";
+import DisplaySwitch from "./components/DisplaySwitch";
 
-const META = {
-  title: `MNEMONICA`,
-  subtitle: `mnemosyne's trial`
-};
+const META = {};
 
 const Window = () => {
-  const [windowState, setWindowState] = useState({
+  const [windowState, setWindowState] = useState<WindowState>({
+    title: `MNEMONICA`,
+    subtitle: `mnemosyne's trial`,
     windowSize: [900, 600],
-    intro: true,
-    menu: true,
+    currentDisplay: "intro",
     settings: {
       level: [0, 0],
       rehabilitation: false
@@ -26,22 +25,22 @@ const Window = () => {
       };
     });
 
+  const start = () => {
+    setWindowState(() => {
+      return {
+        ...windowState,
+        currentDisplay: "menu"
+      };
+    });
+  };
+
   useEffect(() => {
-    const begin = () => {
-      setWindowState(() => {
-        return {
-          ...windowState,
-          intro: false
-        };
-      });
-    };
     const onKeyDown = (e: any) =>
-      e.key === " " ? begin() : console.log(e.key);
+      e.key === " " ? start() : console.log(e.key);
     const mountListener = () => window.addEventListener("keydown", onKeyDown);
     mountListener();
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [windowState]);
-
+  });
   return (
     <article
       style={{
@@ -50,11 +49,7 @@ const Window = () => {
       }}
       className="Window"
     >
-      {windowState.intro ? (
-        <Intro title={META.title} subtitle={META.subtitle} />
-      ) : (
-        <div></div>
-      )}
+      {DisplaySwitch(windowState)()}
     </article>
   );
 };
