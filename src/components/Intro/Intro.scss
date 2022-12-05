@@ -1,13 +1,9 @@
-.Menu {
-  display: flex;
-  flex-flow: column nowrap;
-  height: 85%;
-  width: 100%;
-  pointer-events: none;
+.intro {
+  height: 66%;
   .Header {
     margin: auto;
     height: 66%;
-    width: 66%;
+    width: 100%;
     text-align: center;
     font-size: 3rem;
     letter-spacing: 7px;
@@ -26,19 +22,21 @@
       letter-spacing: 5px;
     }
   }
-}
-.instruction {
-  opacity: 0;
-  animation: fadeOver 3s ease-in-out 3s forwards;
-  .instruction-name {
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 3px 6px;
-    letter-spacing: 1px;
-    font-weight: bolder;
+
+  .instruction {
+    text-align: center;
+
+    opacity: 0;
+    animation: fadeOver 3s ease-in-out 3s forwards;
+    .instruction-name {
+      border: 1px solid black;
+      border-radius: 3px;
+      padding: 3px 6px;
+      letter-spacing: 1px;
+      font-weight: bolder;
+    }
   }
 }
-
 @keyframes fadeOver {
   from {
     opacity: 0;

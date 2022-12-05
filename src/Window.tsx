@@ -1,13 +1,14 @@
 import { WindowProps, WindowState } from "./type";
 import React, { useEffect, useState } from "react";
-import { Intro } from "./components/Menu/Intro";
-import { Instruction } from "./components/Menu/Instruction";
+import { Intro } from "./components/Intro/Intro";
+const META = {
+  title: `MNEMONICA`,
+  subtitle: `mnemosyne's trial`
+};
 
 const Window = () => {
   const [windowState, setWindowState] = useState({
     windowSize: [900, 600],
-    title: `MNEMONICA`,
-    subtitle: `mnemosyne's trial`,
     intro: true,
     menu: true,
     settings: {
@@ -45,7 +46,9 @@ const Window = () => {
         height: `${windowState.windowSize[1]}px`
       }}
       className="Window"
-    ></article>
+    >
+      <Intro title={META.title} subtitle={META.subtitle} />
+    </article>
   );
 };
 export { Window };
