@@ -1,19 +1,11 @@
-const shuffle = (array: any) => {
-  return array
+const shuffle = (array: any) =>
+  array
     .map((value: any) => ({ value, sort: Math.random() }))
     .sort((a: { sort: number }, b: { sort: number }) => a.sort - b.sort)
     .map(({ value }: { value: any }) => value);
-};
 
-const forget = (cardArray: any) => {
-  const recall = duplicate(cardArray);
-  const amnesia = shuffle(recall);
+const forget = (cardArray: any) => shuffle(duplicate(cardArray));
 
-  return amnesia;
-};
-
-const duplicate = (array: any) => {
-  return [...array, ...array];
-};
+const duplicate = (array: any) => [...array, ...array];
 
 export { duplicate, forget, shuffle };
