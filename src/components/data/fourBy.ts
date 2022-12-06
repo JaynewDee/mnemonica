@@ -5,35 +5,35 @@ import {
   GiHeartburn,
   GiHeraldicSun,
   GiAlienSkull,
-  GiCaesar,
+  GiCaesar
 } from "react-icons/gi";
 
 import { FiSave } from "react-icons/fi";
 const memories = [
   {
-    image: GiHummingbird,
+    image: GiHummingbird
   },
   {
-    image: GiSunPriest,
+    image: GiSunPriest
   },
   {
-    image: GiHeartburn,
+    image: GiHeartburn
   },
   {
-    image: FiSave,
+    image: FiSave
   },
   {
-    image: GiFox,
+    image: GiFox
   },
   {
-    image: GiHeraldicSun,
+    image: GiHeraldicSun
   },
   {
-    image: GiAlienSkull,
+    image: GiAlienSkull
   },
   {
-    image: GiCaesar,
-  },
+    image: GiCaesar
+  }
 ];
 
 export { memories };

@@ -3,6 +3,7 @@ import Menu from "./Menu/Menu";
 import "./Game.scss";
 const Game = () => {
   const [gameState, setGameState] = useState({
+    level: [0, 0],
     paused: true
   });
 
@@ -21,10 +22,10 @@ const Game = () => {
             return { ...gameState, paused: !gameState.paused };
           })
         : null;
-    const mountListener = () => window.addEventListener("keydown", onKeyDown);
-    mountListener();
+    window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   });
+
   return (
     <div>
       <div>{gameState.paused ? <Menu pause={pause} /> : <div></div>}</div>
