@@ -1,6 +1,13 @@
 import React, { createRef, SyntheticEvent, useMemo, useState } from "react";
-import { CellTypes } from "./type";
 import { dispatchGuess } from "../../../../utils/reducers";
+import { Dispatch } from "react";
+import { Memory } from "../../data/L1";
+
+export interface CellTypes {
+  data: Memory;
+  gridDispatch: Dispatch<any>;
+  turn: number;
+}
 
 const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
   const cardRef = createRef<any>();
@@ -8,7 +15,10 @@ const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
   const handleEventDispatch = (e: any) => {
     gridDispatch(dispatchGuess(e.target.id, e.target.dataset.unique));
   };
-  const isVisible = () => data.state === "show" || data.state === "solved";
+  const isVisible = () =>
+    data.state === "show" ||
+    data.state === "solved" ||
+    data.state === "claimed";
   return (
     <div className="cell-container">
       <button
@@ -20,6 +30,8 @@ const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
             ? "cell-btn-show"
             : data.state === "solved"
             ? "cell-btn-solved"
+            : data.state === "claimed"
+            ? "cell-btn-claimed"
             : "cell-btn-hidden"
         }
         style={
@@ -31,7 +43,7 @@ const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
         onClick={handleEventDispatch}
       >
         {isVisible() ? (
-          data.image({ size: "23%", pointerEvents: "none" })
+          data.image({ size: "33%", pointerEvents: "none" })
         ) : (
           <></>
         )}

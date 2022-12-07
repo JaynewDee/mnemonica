@@ -4,8 +4,13 @@ import TileGrid from "./PlayField/Grid/TileGrid";
 const Game = () => {
   const [gameState, setGameState] = useState({
     level: [1, 1],
-    paused: true
+    paused: true,
+    score: 0
   });
+
+  const adjustScore = (payload: number) => {
+    setGameState({ ...gameState, score: gameState.score + payload });
+  };
 
   const pause = () =>
     setGameState({
@@ -31,6 +36,7 @@ const Game = () => {
         isPaused={gameState.paused}
         level={gameState.level}
         levelUp={levelUp}
+        updateScore={adjustScore}
       />
     </div>
   );

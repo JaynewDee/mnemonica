@@ -9,10 +9,7 @@ interface ReducerDispatch {
   id?: string;
   uniqueId?: string;
 }
-interface LevelDispatch {
-  type: string;
-  level: number[];
-}
+
 const dispatchGuess = (id: string, uniqueId: string): ReducerDispatch => ({
   type: "guess",
   id: id,
@@ -21,7 +18,11 @@ const dispatchGuess = (id: string, uniqueId: string): ReducerDispatch => ({
 
 const actionLevelUp = (state: GridState) => ({
   ...state,
-  images: shuffle(L2.images)
+  images: shuffle(L2.images),
+  solved: 0,
+  turn: 1,
+  previousId: undefined,
+  previousUnique: undefined
 });
 
 const actionCardFlip = (
@@ -31,7 +32,13 @@ const actionCardFlip = (
   const { turn, images, previousId, previousUnique } = state;
   const { id, uniqueId } = dispatch;
   if (uniqueId === "powerup1") {
-    return { ...state, score: state.score * 2 };
+    return {
+      ...state,
+      images: images.map((img) =>
+        img.uniqueId === "powerup1" ? { ...img, state: "claimed" } : img
+      ),
+      score: state.score * 2
+    };
   }
   if (previousUnique === uniqueId) {
     return { ...state, turn: 2, previousId: id, previousUnique: uniqueId };
@@ -81,7 +88,7 @@ const actionCardFlip = (
 const useGridReducer = (images: Memory[]) => {
   function gridReducer(
     state: GridState,
-    { type, id, uniqueId }: ReducerDispatch | any
+    { type, id, uniqueId }: ReducerDispatch
   ) {
     const actions: any = {
       guess: actionCardFlip,

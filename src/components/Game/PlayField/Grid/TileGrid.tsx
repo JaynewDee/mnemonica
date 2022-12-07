@@ -18,6 +18,7 @@ interface GridProps {
   isPaused: boolean;
   level: number[];
   levelUp: any;
+  updateScore: Dispatch<SetStateAction<any>>;
 }
 
 const TileGrid: React.FC<GridProps> = ({ isPaused, level, levelUp }) => {
@@ -35,19 +36,17 @@ const TileGrid: React.FC<GridProps> = ({ isPaused, level, levelUp }) => {
     setIsSolved(false);
     levelUp();
   };
-
+  const getPowerups = (images: Memory[]) =>
+    images.filter((img) => img.uniqueId === "powerup");
   useEffect(() => {
-    if (
-      grid.solved >=
-      grid.images.length / Math.floor(parseInt(grid.images.length) / 2)
-    )
-      setIsSolved(true);
+    const maxSolutions =
+      grid.images.filter((img: Memory) => img.uniqueId !== "powerup").length /
+      2;
+    if (grid.solved >= maxSolutions) setIsSolved(true);
   }, [grid]);
   return (
     <>
-      <IconContext.Provider
-        value={{ color: "rgba(170,0,0, .75)", size: "3rem" }}
-      >
+      <IconContext.Provider value={{ color: "rgba(170,0,0, .75)" }}>
         {isSolved && !isPaused ? (
           <>
             <h3>SOLVED</h3>{" "}

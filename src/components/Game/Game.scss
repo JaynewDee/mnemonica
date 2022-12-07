@@ -35,7 +35,9 @@ h3 + button {
         border: none;
         transition: all 0.17s;
       }
-      .cell-btn-show {
+      .cell-btn-show,
+      .cell-btn-solved,
+      .cell-btn-claimed {
         pointer-events: none;
       }
       .cell-btn-hidden {
@@ -51,7 +53,10 @@ h3 + button {
       }
       .cell-btn-solved {
         border: 2px solid green;
-        pointer-events: none;
+      }
+      .cell-btn-claimed {
+        box-shadow: 0 0 16px 4px rgba(255, 217, 0, 0.292);
+        border: none;
       }
     }
   }
