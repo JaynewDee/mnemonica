@@ -1,25 +1,23 @@
 import React, { createRef, SyntheticEvent, useMemo } from "react";
 import { CellTypes } from "./type";
-import {
-  dispatchCardFlip,
-  dispatchWrong,
-  dispatchCorrect
-} from "../../../../utils/reducers";
-const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
+import { dispatchGuess } from "../../../../utils/reducers";
+
+const Cell: React.FC<CellTypes> = ({ turn, data, gridDispatch }) => {
   const cardRef = createRef<any>();
   const { id, uniqueId } = data;
-
   const handleEventDispatch = (e: any) => {
-    console.log(e.target);
-    gridDispatch(dispatchCardFlip(e.target.id, e.target.dataset.unique));
+    gridDispatch(dispatchGuess(e.target.id, e.target.dataset.unique));
   };
-
+  const stylesSolved = {
+    border: `1px solid green`
+  };
   return (
     <div className="cell-container">
       <button
         id={id}
         data-unique={uniqueId}
         data-state={data.state}
+        style={String(turn) === "solved" ? stylesSolved : {}}
         className={data.state === "show" ? "cell-btn-show" : "cell-btn-hidden"}
         ref={cardRef}
         onClick={handleEventDispatch}

@@ -1,23 +1,22 @@
-import React, { SyntheticEvent, useMemo, useReducer } from "react";
+import React, { useEffect } from "react";
 import Cell from "./Cell";
 import { IconContext } from "react-icons";
-import { L1 } from "../../data";
 import { gridSize } from "../../../../utils/memories";
-import { Memory } from "../../data/L1";
-import { gridReducer } from "../../../../utils/reducers";
+import { L1, Memory } from "../../data/L1";
+import { useGridReducer } from "../../../../utils/reducers";
 import Menu from "../../Menu/Menu";
 
 export interface GridState {
   images: Memory[];
+  turn: number | "solved";
+  previousId: string | undefined;
+  previousUnique: string | undefined;
 }
 interface GridProps {
   isPaused: boolean;
 }
 const TileGrid: React.FC<GridProps> = ({ isPaused }) => {
-  const [grid, dispatch] = useReducer(gridReducer, {
-    images: [...L1.images],
-    turn: 1
-  });
+  const [grid, dispatch] = useGridReducer(L1.images);
 
   const dimension = `repeat(${gridSize(grid.images.length)}, 1fr)`;
   const containerStyles = {
@@ -33,7 +32,12 @@ const TileGrid: React.FC<GridProps> = ({ isPaused }) => {
       >
         <article style={containerStyles} className="grid-container">
           {grid.images.map((item: Memory) => (
-            <Cell key={item.uniqueId} data={item} gridDispatch={dispatch} />
+            <Cell
+              key={item.uniqueId}
+              data={item}
+              gridDispatch={dispatch}
+              turn={grid.turn}
+            />
           ))}
         </article>
       </IconContext.Provider>

@@ -3,4 +3,5 @@ import { Dispatch } from "react";
 export interface CellTypes {
   data: Memory;
   gridDispatch: Dispatch<any>;
+  turn: number;
 }

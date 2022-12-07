@@ -1,5 +1,6 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
+import { SyntheticEventData } from "react-dom/test-utils";
 
 const menuRoot = document.getElementById("menu-root");
 

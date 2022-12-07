@@ -6,7 +6,7 @@ const Window = () => {
   const [windowState, setWindowState] = useState<WindowState>({
     title: `MNEMONICA`,
     subtitle: `mnemosyne's trial`,
-    windowSize: [900, 600],
+    windowSize: [1280, 720],
     currentDisplay: "intro",
     settings: {
       level: [0, 0],
