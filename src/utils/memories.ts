@@ -1,11 +1,11 @@
-const shuffle = (array: any) =>
+import { Memory } from "../components/Game/data/L1";
+
+const shuffle = (array: Memory[]): Memory[] =>
   array
-    .map((value: any) => ({ value, sort: Math.random() }))
+    .map((value: Memory) => ({ value, sort: Math.random() }))
     .sort((a: { sort: number }, b: { sort: number }) => a.sort - b.sort)
-    .map(({ value }: { value: any }) => value);
+    .map(({ value }: { value: Memory }) => value);
 
-const forget = (cardArray: any) => shuffle(duplicate(cardArray));
+const gridSize = (arrayLength: number) => String(Math.sqrt(arrayLength));
 
-const duplicate = (array: any) => [...array, ...array];
-
-export { duplicate, forget, shuffle };
+export { shuffle, gridSize };

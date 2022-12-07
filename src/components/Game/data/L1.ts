@@ -1,14 +1,16 @@
 import { GiHummingbird, GiFox } from "react-icons/gi";
 
-import { FiSave } from "react-icons/fi";
 import { IconType } from "react-icons";
 
+import { shuffle } from "../../../utils/memories";
 export interface Memory {
   id: number;
   uniqueId: number;
   image: IconType;
 }
-const Level = (images: Memory[]) => ({ images });
+const Level = (images: Memory[]) => ({
+  images: images.map((img) => Object.freeze(img))
+});
 const memoriesL1: Memory[] = [
   {
     id: 1,
@@ -31,5 +33,5 @@ const memoriesL1: Memory[] = [
     image: GiFox
   }
 ];
-const L1 = Level(memoriesL1);
+const L1 = Level(shuffle(memoriesL1));
 export { L1 };
