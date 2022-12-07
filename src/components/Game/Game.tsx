@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import Score from "./Dock/Score";
 import "./Game.scss";
 import TileGrid from "./PlayField/Grid/TileGrid";
 const Game = () => {
@@ -7,6 +8,7 @@ const Game = () => {
     paused: true,
     score: 0
   });
+  const [isSolved, setIsSolved] = useState(false);
 
   const adjustScore = (payload: number) => {
     setGameState({ ...gameState, score: gameState.score + payload });
@@ -18,11 +20,13 @@ const Game = () => {
       paused: !gameState.paused
     });
 
-  const levelUp = () =>
+  const levelUp = () => {
     setGameState((prev) => ({
       ...gameState,
-      level: [prev.level[0] + 1, prev.level[1]]
+      level: [(prev.level[0] += 1), prev.level[1]]
     }));
+    setIsSolved(true);
+  };
 
   useEffect(() => {
     const onKeyDown = (e: any) => (e.key === " " ? pause() : null);
@@ -32,11 +36,23 @@ const Game = () => {
 
   return (
     <div className="game-container">
+      <header className="score-board">
+        <Score score={gameState.score} />
+        {isSolved ? (
+          <div className="proceed">
+            <h3>SOLVED</h3> <button autoFocus={true}>PROCEED {">"}</button>
+          </div>
+        ) : (
+          <></>
+        )}
+      </header>
       <TileGrid
         isPaused={gameState.paused}
         level={gameState.level}
         levelUp={levelUp}
         updateScore={adjustScore}
+        isSolved={isSolved}
+        setIsSolved={setIsSolved}
       />
     </div>
   );

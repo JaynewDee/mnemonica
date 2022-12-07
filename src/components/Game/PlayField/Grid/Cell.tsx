@@ -1,4 +1,4 @@
-import React, { createRef, SyntheticEvent, useMemo, useState } from "react";
+import React, { SetStateAction } from "react";
 import { dispatchGuess } from "../../../../utils/reducers";
 import { Dispatch } from "react";
 import { Memory } from "../../data/L1";
@@ -7,18 +7,25 @@ export interface CellTypes {
   data: Memory;
   gridDispatch: Dispatch<any>;
   turn: number;
+  updateScore: Dispatch<SetStateAction<number>>;
 }
 
-const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
-  const cardRef = createRef<any>();
+export const isVisible = (dataState: string) =>
+  dataState === "show" || dataState === "solved" || dataState === "claimed";
+
+const Cell: React.FC<CellTypes> = ({
+  data,
+  gridDispatch,
+  updateScore,
+  turn
+}) => {
   const { id, uniqueId } = data;
   const handleEventDispatch = (e: any) => {
-    gridDispatch(dispatchGuess(e.target.id, e.target.dataset.unique));
+    gridDispatch(
+      dispatchGuess(e.target.id, e.target.dataset.unique, updateScore)
+    );
   };
-  const isVisible = () =>
-    data.state === "show" ||
-    data.state === "solved" ||
-    data.state === "claimed";
+
   return (
     <div className="cell-container">
       <button
@@ -26,10 +33,9 @@ const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
         data-unique={uniqueId}
         data-state={data.state}
         className={data.state}
-        ref={cardRef}
         onClick={handleEventDispatch}
       >
-        {isVisible() ? (
+        {isVisible(data.state) ? (
           data.image({ size: "33%", pointerEvents: "none" })
         ) : (
           <></>

@@ -1,4 +1,10 @@
-import { useEffect, useReducer, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useReducer,
+  useState
+} from "react";
 import { Memory } from "../components/Game/data/L1";
 import { L2 } from "../components/Game/data/L2";
 import { GridState } from "../components/Game/PlayField/Grid/TileGrid";
@@ -6,14 +12,20 @@ import { shuffle } from "./memories";
 
 interface ReducerDispatch {
   type: string;
-  id?: string;
-  uniqueId?: string;
+  id: string;
+  uniqueId: string;
+  updateScore: Dispatch<SetStateAction<number>>;
 }
 
-const dispatchGuess = (id: string, uniqueId: string): ReducerDispatch => ({
+const dispatchGuess = (
+  id: string,
+  uniqueId: string,
+  updateScore: Dispatch<SetStateAction<number>>
+): ReducerDispatch => ({
   type: "guess",
   id: id,
-  uniqueId: uniqueId
+  uniqueId: uniqueId,
+  updateScore: updateScore
 });
 
 const actionLevelUp = (state: GridState) => ({
@@ -107,4 +119,21 @@ const useGridReducer = (images: Memory[]) => {
   });
 };
 
-export { dispatchGuess, useGridReducer };
+const useLvlReducer = (state: GridState, newLevel: number[]) => {
+  const actionSetLevel = (state: any, newLevel: number[]) => ({
+    ...state,
+    level: newLevel
+  });
+  function lvlReducer(state: GridState, newLevel: number[]) {
+    const actions: any = {
+      set: actionSetLevel
+    };
+    return actions["set"](state, newLevel);
+  }
+
+  return useReducer(lvlReducer, {
+    ...state,
+    level: newLevel
+  });
+};
+export { dispatchGuess, useGridReducer, useLvlReducer };
