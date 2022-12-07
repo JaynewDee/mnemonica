@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Cell from "./Cell";
 import { IconContext } from "react-icons";
 import { gridSize } from "../../../../utils/memories";
@@ -12,14 +12,17 @@ export interface GridState {
   previousId: string | undefined;
   previousUnique: string | undefined;
   solved: number;
+  score: number;
 }
 interface GridProps {
   isPaused: boolean;
+  level: number[];
+  levelUp: any;
 }
-const TileGrid: React.FC<GridProps> = ({ isPaused }) => {
+
+const TileGrid: React.FC<GridProps> = ({ isPaused, level, levelUp }) => {
   const [grid, dispatch] = useGridReducer(L1.images);
   const [isSolved, setIsSolved] = useState(false);
-  const [styleState, setStyleState] = useState({});
   const dimension = `repeat(${gridSize(grid.images.length)}, 1fr)`;
   const containerStyles = {
     gridTemplateColumns: dimension,
@@ -27,21 +30,35 @@ const TileGrid: React.FC<GridProps> = ({ isPaused }) => {
     display: isPaused ? "none" : "grid"
   };
 
+  const handleLvlChange = () => {
+    dispatch({ type: "updateGrid" });
+    setIsSolved(false);
+    levelUp();
+  };
+
   useEffect(() => {
-    console.log(grid.solved);
-    if (grid.solved >= grid.images.length / 2) setIsSolved(true);
+    if (
+      grid.solved >=
+      grid.images.length / Math.floor(parseInt(grid.images.length) / 2)
+    )
+      setIsSolved(true);
   }, [grid]);
   return (
     <>
       <IconContext.Provider
         value={{ color: "rgba(170,0,0, .75)", size: "3rem" }}
       >
-        {isSolved ? <h3>SOLVED</h3> : <></>}
-        <button>PROCEED {">"}</button>
+        {isSolved && !isPaused ? (
+          <>
+            <h3>SOLVED</h3>{" "}
+            <button onClick={handleLvlChange}>PROCEED {">"}</button>
+          </>
+        ) : (
+          <></>
+        )}
         <article style={containerStyles} className="grid-container">
           {grid.images.map((item: Memory) => (
             <Cell
-              styles={styleState}
               key={item.uniqueId}
               data={item}
               gridDispatch={dispatch}

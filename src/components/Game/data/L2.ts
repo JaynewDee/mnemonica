@@ -1,4 +1,10 @@
-import { GiHummingbird, GiFox } from "react-icons/gi";
+import {
+  GiHummingbird,
+  GiFox,
+  GiBigEgg,
+  GiCat,
+  GiPotionBall
+} from "react-icons/gi";
 
 import { IconType } from "react-icons";
 
@@ -13,7 +19,7 @@ export interface Memory {
 const Level = (images: Memory[]) => ({
   images: images.map((img) => Object.freeze(img))
 });
-const memoriesL1: Memory[] = [
+const memoriesL2: Memory[] = [
   {
     id: `1`,
     uniqueId: `41`,
@@ -41,7 +47,42 @@ const memoriesL1: Memory[] = [
     image: GiFox,
     state: "hidden",
     memory: "fox"
+  },
+  {
+    id: `3`,
+    uniqueId: `45`,
+    image: GiBigEgg,
+    state: "hidden",
+    memory: "egg"
+  },
+  {
+    id: `3`,
+    uniqueId: `46`,
+    image: GiBigEgg,
+    state: "hidden",
+    memory: "egg"
+  },
+  {
+    id: `4`,
+    uniqueId: `47`,
+    image: GiCat,
+    state: "hidden",
+    memory: "cat"
+  },
+  {
+    id: `4`,
+    uniqueId: `48`,
+    image: GiCat,
+    state: "hidden",
+    memory: "cat"
+  },
+  {
+    id: `5`,
+    uniqueId: `powerup1`,
+    image: GiPotionBall,
+    state: "hidden",
+    memory: "strength"
   }
 ];
-const L1 = Level(shuffle(memoriesL1));
-export { L1 };
+const L2 = Level(shuffle(memoriesL2));
+export { L2 };
