@@ -35,6 +35,9 @@
         box-shadow: 0 0 12px 1px rgba(30, 30, 30, 0.171);
         transform: scale(1.03);
       }
+      .cell-btn-hidden:hover {
+        transform: scale(0.97);
+      }
     }
   }
 }

@@ -16,8 +16,9 @@ interface GridProps {
 const TileGrid: React.FC<GridProps> = ({ isPaused }) => {
   const [grid, dispatch] = useReducer(gridReducer, {
     images: [...L1.images],
-    loading: true
+    turn: 1
   });
+
   const dimension = `repeat(${gridSize(grid.images.length)}, 1fr)`;
   const containerStyles = {
     gridTemplateColumns: dimension,

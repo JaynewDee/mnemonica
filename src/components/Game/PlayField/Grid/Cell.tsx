@@ -25,7 +25,7 @@ const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
         onClick={handleEventDispatch}
       >
         {data.state === "show" ? (
-          data.image({ size: "2rem", pointerEvents: "none" })
+          data.image({ size: "23%", pointerEvents: "none" })
         ) : (
           <></>
         )}

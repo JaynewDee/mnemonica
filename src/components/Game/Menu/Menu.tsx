@@ -1,16 +1,12 @@
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 const menuRoot = document.getElementById("menu-root");
 
-const Menu = ({ pause }: any) => {
+const Menu = () => {
   useEffect(() => {
     const onKeyDown = (e: any) =>
-      e.key === " "
-        ? pause("game")
-        : e.key === "Escape"
-        ? window.location.reload()
-        : console.log(e.key);
+      e.key === "Escape" ? window.location.reload() : console.log(e.key);
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   });
