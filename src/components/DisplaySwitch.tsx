@@ -1,7 +1,5 @@
-import React from "react";
 import { Intro } from "./Intro/Intro";
 import { WindowState } from "../type";
-import Menu from "./Game/Menu/Menu";
 import Game from "./Game/Game";
 
 const DisplaySwitch = (windowState: WindowState, pause: Function) => {

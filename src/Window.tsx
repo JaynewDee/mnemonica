@@ -1,9 +1,6 @@
-import { WindowProps, WindowState } from "./type";
-import React, { useEffect, useState } from "react";
-import { Intro } from "./components/Intro/Intro";
+import { WindowState } from "./type";
+import { useState } from "react";
 import DisplaySwitch from "./components/DisplaySwitch";
-
-const META = {};
 
 const Window = () => {
   const [windowState, setWindowState] = useState<WindowState>({
@@ -17,13 +14,13 @@ const Window = () => {
     }
   });
 
-  const setSize = (size: [number, number]) =>
-    setWindowState((prev) => {
-      return {
-        ...prev,
-        windowSize: size
-      };
-    });
+  // const setSize = (size: [number, number]) =>
+  //   setWindowState((prev) => {
+  //     return {
+  //       ...prev,
+  //       windowSize: size
+  //     };
+  //   });
 
   const pause = (displayState: string) => {
     setWindowState(() => {

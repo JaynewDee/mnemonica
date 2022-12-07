@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Menu from "./Menu/Menu";
 import "./Game.scss";
 import TileGrid from "./PlayField/Grid/TileGrid";

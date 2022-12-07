@@ -1,4 +1,3 @@
-import React from "react";
 import { GridState } from "../components/Game/PlayField/Grid/TileGrid";
 
 interface ReducerDispatch {

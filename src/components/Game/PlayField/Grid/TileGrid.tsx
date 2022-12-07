@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import Cell from "./Cell";
 import { IconContext } from "react-icons";
 import { L1 } from "../../data";

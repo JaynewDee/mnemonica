@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment, useRef } from "react";
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
 const menuRoot = document.getElementById("menu-root");
@@ -23,9 +23,7 @@ const Menu = ({ pause }: any) => {
     </div>
   );
 
-  return (
-    <Fragment>{createPortal(MenuElement(), menuRoot as HTMLElement)}</Fragment>
-  );
+  return <>{createPortal(MenuElement(), menuRoot as HTMLElement)}</>;
 };
 
 export default Menu;
