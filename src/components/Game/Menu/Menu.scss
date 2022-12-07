@@ -7,4 +7,19 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 66%;
+  .paused {
+    animation: blink 3s ease-in-out infinite;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

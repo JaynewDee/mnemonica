@@ -9,7 +9,12 @@ import {
 } from "react-icons/gi";
 
 import { FiSave } from "react-icons/fi";
-const memories = [
+import { IconType } from "react-icons";
+
+interface MemoriesL1 {
+  image: IconType;
+}
+const memories: MemoriesL1[] = [
   {
     image: GiHummingbird
   },
@@ -17,22 +22,10 @@ const memories = [
     image: GiSunPriest
   },
   {
-    image: GiHeartburn
+    image: GiHummingbird
   },
   {
-    image: FiSave
-  },
-  {
-    image: GiFox
-  },
-  {
-    image: GiHeraldicSun
-  },
-  {
-    image: GiAlienSkull
-  },
-  {
-    image: GiCaesar
+    image: GiSunPriest
   }
 ];
 
