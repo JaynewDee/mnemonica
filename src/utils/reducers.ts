@@ -10,7 +10,7 @@ import { L2 } from "../components/Game/data/L2";
 import { GridState } from "../components/Game/PlayField/Grid/TileGrid";
 import { shuffle } from "./memories";
 
-interface ReducerDispatch {
+export interface ReducerDispatch {
   type: string;
   id: string;
   uniqueId: string;
@@ -34,17 +34,15 @@ const actionLevelUp = (state: GridState) => ({
   solved: 0,
   turn: 1,
   previousId: undefined,
-  previousUnique: undefined
+  previousUnique: undefined,
+  type: "updateGrid"
 });
 
 const claimPowerup = (images: Memory[]) =>
   images.map((img) =>
     img.id === "powerup" ? { ...img, state: "claimed" } : img
   );
-const actionCardFlip = (
-  state: GridState,
-  dispatch: ReducerDispatch
-): GridState => {
+const actionCardFlip = (state: GridState, dispatch: any): GridState => {
   const { turn, images, previousId, previousUnique } = state;
   const { id, uniqueId } = dispatch;
   if (id === "powerup") {
@@ -100,10 +98,7 @@ const actionCardFlip = (
 };
 
 const useGridReducer = (images: Memory[]) => {
-  function gridReducer(
-    state: GridState,
-    { type, id, uniqueId }: ReducerDispatch
-  ) {
+  function gridReducer(state: GridState, { type, id, uniqueId }: any) {
     const actions: any = {
       guess: actionCardFlip,
       updateGrid: actionLevelUp
@@ -136,4 +131,4 @@ const useLvlReducer = (state: GridState, newLevel: number[]) => {
     level: newLevel
   });
 };
-export { dispatchGuess, useGridReducer, useLvlReducer };
+export { dispatchGuess, actionLevelUp, useGridReducer, useLvlReducer };
