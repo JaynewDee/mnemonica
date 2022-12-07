@@ -19,7 +19,7 @@ const TileGrid: React.FC = () => {
   return (
     <IconContext.Provider value={{ color: "rgba(170,0,0, .75)", size: "3rem" }}>
       <article style={containerStyles} className="grid-container">
-        {gridState.images.map((item, idx) => (
+        {gridState.images.map((item) => (
           <Cell key={item.uniqueId} data={item} />
         ))}
       </article>
