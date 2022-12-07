@@ -6,7 +6,7 @@ import { CellTypes } from "./type";
 const Cell: React.FC<CellTypes> = ({ data }: { data: Memory }) => {
   return (
     <div className="cell-container">
-      <button className="cell-btn"></button>
+      <button className="cell-btn">{data.image({ size: "2rem" })}</button>
     </div>
   );
 };

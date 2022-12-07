@@ -1,1 +1,41 @@
 @use "./Menu/Menu.scss";
+
+.game-container {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 90%;
+  width: 90%;
+  justify-content: flex-end;
+
+  .grid-container {
+    width: 66%;
+    height: 66%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    margin: 0 auto;
+
+    .cell-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      object-fit: fill;
+
+      .cell-btn {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+@keyframes flip {
+  0% {
+  }
+  100% {
+    background-color: rgba(170, 0, 0, 1);
+    opacity: 0.85;
+    border-radius: 5px;
+  }
+}

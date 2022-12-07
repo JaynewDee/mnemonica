@@ -4,7 +4,7 @@ import "./Game.scss";
 import TileGrid from "./PlayField/Grid/TileGrid";
 const Game = () => {
   const [gameState, setGameState] = useState({
-    level: [0, 0],
+    level: [1, 1],
     paused: true
   });
 
@@ -28,16 +28,8 @@ const Game = () => {
   });
 
   return (
-    <div>
-      <div>
-        {gameState.paused ? (
-          <Menu pause={pause} />
-        ) : (
-          <div>
-            <TileGrid />
-          </div>
-        )}
-      </div>
+    <div className="game-container">
+      {gameState.paused ? <Menu pause={pause} /> : <TileGrid />}
     </div>
   );
 };

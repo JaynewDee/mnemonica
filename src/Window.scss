@@ -1,5 +1,4 @@
 @use "./components/Intro/Intro.scss";
-@use "./components/Game/PlayField/Grid/Grid.scss";
 
 .Window {
   background: rgba(240, 240, 240, 0.95);
@@ -10,5 +9,6 @@
   align-items: center;
   justify-content: center;
   max-width: 80vw;
+  height: 66%;
   margin: auto;
 }

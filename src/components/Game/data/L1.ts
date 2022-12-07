@@ -1,12 +1,4 @@
-import {
-  GiHummingbird,
-  GiSunPriest,
-  GiFox,
-  GiHeartburn,
-  GiHeraldicSun,
-  GiAlienSkull,
-  GiCaesar
-} from "react-icons/gi";
+import { GiHummingbird, GiFox } from "react-icons/gi";
 
 import { FiSave } from "react-icons/fi";
 import { IconType } from "react-icons";
@@ -16,6 +8,7 @@ export interface Memory {
   uniqueId: number;
   image: IconType;
 }
+const Level = (images: Memory[]) => ({ images });
 const memoriesL1: Memory[] = [
   {
     id: 1,
@@ -25,7 +18,7 @@ const memoriesL1: Memory[] = [
   {
     id: 2,
     uniqueId: 42,
-    image: GiSunPriest
+    image: GiFox
   },
   {
     id: 1,
@@ -35,8 +28,8 @@ const memoriesL1: Memory[] = [
   {
     id: 2,
     uniqueId: 44,
-    image: GiSunPriest
+    image: GiFox
   }
 ];
-
-export { memoriesL1 };
+const L1 = Level(memoriesL1);
+export { L1 };
