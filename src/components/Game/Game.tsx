@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Menu from "./Menu/Menu";
 import "./Game.scss";
+import TileGrid from "./PlayField/Grid/TileGrid";
 const Game = () => {
   const [gameState, setGameState] = useState({
     level: [0, 0],
@@ -28,7 +29,15 @@ const Game = () => {
 
   return (
     <div>
-      <div>{gameState.paused ? <Menu pause={pause} /> : <div></div>}</div>
+      <div>
+        {gameState.paused ? (
+          <Menu pause={pause} />
+        ) : (
+          <div>
+            <TileGrid />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

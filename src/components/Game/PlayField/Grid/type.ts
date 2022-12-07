@@ -1,7 +1,5 @@
-import { IconType } from "react-icons";
+import { Memory } from "../../data/L1";
 
 export interface CellTypes {
-  img: {
-    image: IconType;
-  };
+  data: Memory;
 }
