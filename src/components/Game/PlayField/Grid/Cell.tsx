@@ -1,23 +1,33 @@
 import React, { createRef, SyntheticEvent } from "react";
 import { CellTypes } from "./type";
-
-const Cell: React.FC<CellTypes> = ({ data }) => {
+import {
+  dispatchCardFlip,
+  dispatchWrong,
+  dispatchCorrect
+} from "../../../../utils/reducers";
+const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
   const cardRef = createRef<any>();
   const { id, uniqueId } = data;
-  const flipCard = (e: SyntheticEvent) => {
-    console.log(cardRef.current);
+
+  const handleEventDispatch = (e: any) => {
+    console.log(e.target);
+    gridDispatch(dispatchCardFlip(e.target.id, e.target.dataset.unique));
   };
   return (
-    // @ts-ignore
     <div className="cell-container">
       <button
         id={id}
         data-unique={uniqueId}
-        className="cell-btn"
+        data-state={data.state}
+        className={data.state === "show" ? "cell-btn-show" : "cell-btn-hidden"}
         ref={cardRef}
-        onClick={flipCard}
+        onClick={handleEventDispatch}
       >
-        {data.image({ size: "2rem" })}
+        {data.state === "show" ? (
+          data.image({ size: "2rem", pointerEvents: "none" })
+        ) : (
+          <></>
+        )}
       </button>
     </div>
   );

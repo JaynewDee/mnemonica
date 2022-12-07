@@ -9,19 +9,15 @@ const Game = () => {
   });
 
   const pause = () =>
-    setGameState(() => {
-      return {
-        ...gameState,
-        paused: !gameState.paused
-      };
+    setGameState({
+      ...gameState,
+      paused: !gameState.paused
     });
 
   useEffect(() => {
     const onKeyDown = (e: any) =>
       e.key === " "
-        ? setGameState(() => {
-            return { ...gameState, paused: !gameState.paused };
-          })
+        ? setGameState({ ...gameState, paused: !gameState.paused })
         : null;
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);

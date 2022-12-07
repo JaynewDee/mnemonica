@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { SyntheticEvent, useReducer } from "react";
 import Cell from "./Cell";
 import { IconContext } from "react-icons";
 import { L1 } from "../../data";
@@ -8,16 +8,13 @@ import { gridReducer } from "../../../../utils/reducers";
 
 export interface GridState {
   images: Memory[];
-  size: string;
-  loading: boolean;
 }
 const TileGrid: React.FC = () => {
   const [grid, dispatch] = useReducer(gridReducer, {
     images: [...L1.images],
-    size: gridSize(L1.images.length),
     loading: true
   });
-  const dimension = `repeat(${grid.size}, 1fr)`;
+  const dimension = `repeat(${gridSize(grid.images.length)}, 1fr)`;
   const containerStyles = {
     gridTemplateColumns: dimension,
     gridTemplateRows: dimension

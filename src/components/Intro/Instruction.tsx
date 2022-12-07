@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Instruction: React.FC<any> = (props: any) => {
+const Instruction: React.FC = () => {
   const [instruction, setInstruction] = useState({
     name: `SPACEBAR`,
     action: `begin`

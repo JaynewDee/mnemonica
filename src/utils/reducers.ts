@@ -2,29 +2,39 @@ import { GridState } from "../components/Game/PlayField/Grid/TileGrid";
 
 interface ReducerDispatch {
   type: string;
-  id: number;
-  uniqueId: number;
+  id: string;
+  uniqueId: string;
 }
 
-const dispatchCardFlip = (id: string, uniqueId: string) => ({
+const dispatchCardFlip = (id: string, uniqueId: string): ReducerDispatch => ({
   type: "guess",
-  id: parseInt(id),
-  uniqueId: parseInt(uniqueId)
+  id: id,
+  uniqueId: uniqueId
 });
 
-const dispatchWrong = (id: string, uniqueId: string) => ({
+const dispatchWrong = (id: string, uniqueId: string): ReducerDispatch => ({
   type: "wrong",
-  id: parseInt(id),
-  uniqueId: parseInt(uniqueId)
+  id: id,
+  uniqueId: uniqueId
 });
 
-const dispatchCorrect = (id: string, uniqueId: string) => ({
+const dispatchCorrect = (id: string, uniqueId: string): ReducerDispatch => ({
   type: "correct",
-  id: parseInt(id),
-  uniqueId: parseInt(uniqueId)
+  id: id,
+  uniqueId: uniqueId
 });
 
-const actionCardFlip = (state: GridState) => state;
+const actionCardFlip = (
+  state: GridState,
+  { type, id, uniqueId }: ReducerDispatch
+): GridState => ({
+  images: [
+    ...state.images.filter((notClicked) => notClicked.uniqueId !== uniqueId),
+    ...state.images
+      .filter((clicked) => clicked.uniqueId === uniqueId)
+      .map((img) => ({ ...img, state: "show" }))
+  ]
+});
 const actionWrong = (state: GridState) => state;
 const actionCorrect = (state: GridState) => state;
 
@@ -34,6 +44,8 @@ function gridReducer(state: GridState, action: ReducerDispatch) {
     wrong: actionWrong,
     correct: actionCorrect
   };
-  return actions[action.type](state);
+  const test = actions[action.type](state, action);
+  console.log(test);
+  return test;
 }
 export { dispatchCardFlip, dispatchWrong, dispatchCorrect, gridReducer };
