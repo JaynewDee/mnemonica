@@ -2,7 +2,7 @@ import React, { createRef, SyntheticEvent, useMemo, useState } from "react";
 import { CellTypes } from "./type";
 import { dispatchGuess } from "../../../../utils/reducers";
 
-const Cell: React.FC<CellTypes> = ({ turn, data, gridDispatch }) => {
+const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
   const cardRef = createRef<any>();
   const { id, uniqueId } = data;
   const handleEventDispatch = (e: any) => {
@@ -15,7 +15,18 @@ const Cell: React.FC<CellTypes> = ({ turn, data, gridDispatch }) => {
         id={id}
         data-unique={uniqueId}
         data-state={data.state}
-        className={data.state === "show" ? "cell-btn-show" : "cell-btn-hidden"}
+        className={
+          data.state === "show"
+            ? "cell-btn-show"
+            : data.state === "solved"
+            ? "cell-btn-solved"
+            : "cell-btn-hidden"
+        }
+        style={
+          data.state === "show" || data.state === "solved"
+            ? { pointerEvents: "none" }
+            : {}
+        }
         ref={cardRef}
         onClick={handleEventDispatch}
       >

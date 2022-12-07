@@ -24,7 +24,7 @@ const actionCardFlip = (
   const { turn, images, previousId, previousUnique } = state;
   const { id, uniqueId } = dispatch;
   if (previousUnique === uniqueId) {
-    return { ...state, previousId: id, previousUnique: uniqueId };
+    return { ...state, turn: 2, previousId: id, previousUnique: uniqueId };
   }
   if (checkSolved(images) === images.length)
     return { ...state, turn: "solved" };
@@ -44,11 +44,10 @@ const actionCardFlip = (
     };
   } else if (turn === 2) {
     if (previousId === id) {
-      const withMatches = images.map((img) =>
-        img.uniqueId === uniqueId ? { ...img, state: "show" } : img
-      );
       return {
-        images: withMatches,
+        images: images.map((img) =>
+          img.id === id ? { ...img, state: "solved" } : img
+        ),
         turn: 1,
         previousId: undefined,
         previousUnique: undefined
