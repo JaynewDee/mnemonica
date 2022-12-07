@@ -25,20 +25,7 @@ const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
         id={id}
         data-unique={uniqueId}
         data-state={data.state}
-        className={
-          data.state === "show"
-            ? "cell-btn-show"
-            : data.state === "solved"
-            ? "cell-btn-solved"
-            : data.state === "claimed"
-            ? "cell-btn-claimed"
-            : "cell-btn-hidden"
-        }
-        style={
-          data.state === "show" || data.state === "solved"
-            ? { pointerEvents: "none" }
-            : {}
-        }
+        className={data.state}
         ref={cardRef}
         onClick={handleEventDispatch}
       >

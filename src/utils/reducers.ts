@@ -25,18 +25,20 @@ const actionLevelUp = (state: GridState) => ({
   previousUnique: undefined
 });
 
+const claimPowerup = (images: Memory[]) =>
+  images.map((img) =>
+    img.id === "powerup" ? { ...img, state: "claimed" } : img
+  );
 const actionCardFlip = (
   state: GridState,
   dispatch: ReducerDispatch
 ): GridState => {
   const { turn, images, previousId, previousUnique } = state;
   const { id, uniqueId } = dispatch;
-  if (uniqueId === "powerup1") {
+  if (id === "powerup") {
     return {
       ...state,
-      images: images.map((img) =>
-        img.uniqueId === "powerup1" ? { ...img, state: "claimed" } : img
-      ),
+      images: claimPowerup(images),
       score: state.score * 2
     };
   }

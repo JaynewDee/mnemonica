@@ -24,6 +24,7 @@ interface GridProps {
 const TileGrid: React.FC<GridProps> = ({ isPaused, level, levelUp }) => {
   const [grid, dispatch] = useGridReducer(L1.images);
   const [isSolved, setIsSolved] = useState(false);
+
   const dimension = `repeat(${gridSize(grid.images.length)}, 1fr)`;
   const containerStyles = {
     gridTemplateColumns: dimension,
@@ -36,14 +37,16 @@ const TileGrid: React.FC<GridProps> = ({ isPaused, level, levelUp }) => {
     setIsSolved(false);
     levelUp();
   };
+
   const getPowerups = (images: Memory[]) =>
-    images.filter((img) => img.uniqueId === "powerup");
+    images.filter((img) => img.id === "powerup");
+
   useEffect(() => {
     const maxSolutions =
-      grid.images.filter((img: Memory) => img.uniqueId !== "powerup").length /
-      2;
+      grid.images.filter((img: Memory) => img.id !== "powerup").length / 2;
     if (grid.solved >= maxSolutions) setIsSolved(true);
   }, [grid]);
+
   return (
     <>
       <IconContext.Provider value={{ color: "rgba(170,0,0, .75)" }}>

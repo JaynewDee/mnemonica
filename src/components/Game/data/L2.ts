@@ -77,8 +77,8 @@ const memoriesL2: Memory[] = [
     memory: "cat"
   },
   {
-    id: `5`,
-    uniqueId: `powerup1`,
+    id: `powerup`,
+    uniqueId: `doubleScore`,
     image: GiPotionBall,
     state: "hidden",
     memory: "strength"

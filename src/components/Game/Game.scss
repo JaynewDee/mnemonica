@@ -26,37 +26,46 @@ h3 + button {
       justify-content: center;
       align-items: center;
 
-      .cell-btn-show,
-      .cell-btn-hidden,
-      .cell-btn-solved {
+      .show,
+      .hidden,
+      .solved,
+      .claimed {
         width: 100%;
         height: 100%;
         border-radius: 3px;
-        border: none;
         transition: all 0.17s;
       }
-      .cell-btn-show,
-      .cell-btn-solved,
-      .cell-btn-claimed {
+      .show,
+      .solved,
+      .laimed {
         pointer-events: none;
       }
-      .cell-btn-hidden {
+      .hidden {
         background-color: black;
         color: black;
       }
-      .cell-btn-show:hover {
+      .show:hover {
         box-shadow: 0 0 12px 1px rgba(30, 30, 30, 0.171);
         transform: scale(1.03);
       }
-      .cell-btn-hidden:hover {
+      .hidden:hover {
         transform: scale(0.97);
       }
-      .cell-btn-solved {
+      .solved {
         border: 2px solid green;
       }
-      .cell-btn-claimed {
-        box-shadow: 0 0 16px 4px rgba(255, 217, 0, 0.292);
+      .claimed {
+        box-shadow: 0 0 16px 1px rgba(255, 217, 0, 0.292);
         border: none;
+      }
+      .claimed::after {
+        // position: relative;
+        box-shadow: 0 0 16px 4px rgba(255, 217, 0, 0.292);
+        background: none;
+        border-radius: 50%;
+        border: 0px solid white;
+        z-index: 10;
+        animation: shine 1s infinite;
       }
     }
   }
@@ -74,5 +83,17 @@ h3 + button {
     background-color: rgba(170, 0, 0, 1);
     opacity: 0.85;
     border-radius: 5px;
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
   }
 }
