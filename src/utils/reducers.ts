@@ -29,10 +29,15 @@ const actionCardFlip = (
   { type, id, uniqueId }: ReducerDispatch
 ): GridState => ({
   images: [
-    ...state.images.filter((notClicked) => notClicked.uniqueId !== uniqueId),
-    ...state.images
-      .filter((clicked) => clicked.uniqueId === uniqueId)
-      .map((img) => ({ ...img, state: "show" }))
+    ...state.images.map((img) => {
+      if (img.uniqueId === uniqueId) {
+        return {
+          ...img,
+          state: "show"
+        };
+      }
+      return img;
+    })
   ]
 });
 const actionWrong = (state: GridState) => state;
