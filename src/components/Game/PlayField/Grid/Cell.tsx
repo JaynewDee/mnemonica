@@ -1,4 +1,4 @@
-import React, { createRef, SyntheticEvent } from "react";
+import React, { createRef, SyntheticEvent, useMemo } from "react";
 import { CellTypes } from "./type";
 import {
   dispatchCardFlip,
@@ -13,6 +13,7 @@ const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
     console.log(e.target);
     gridDispatch(dispatchCardFlip(e.target.id, e.target.dataset.unique));
   };
+
   return (
     <div className="cell-container">
       <button

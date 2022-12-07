@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Menu from "./Menu/Menu";
 import "./Game.scss";
 import TileGrid from "./PlayField/Grid/TileGrid";
 const Game = () => {
@@ -25,7 +24,7 @@ const Game = () => {
 
   return (
     <div className="game-container">
-      {gameState.paused ? <Menu pause={pause} /> : <TileGrid />}
+      <TileGrid isPaused={gameState.paused} />
     </div>
   );
 };

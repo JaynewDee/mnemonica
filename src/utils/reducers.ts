@@ -29,15 +29,14 @@ const actionCardFlip = (
   { type, id, uniqueId }: ReducerDispatch
 ): GridState => ({
   images: [
-    ...state.images.map((img) => {
-      if (img.uniqueId === uniqueId) {
-        return {
-          ...img,
-          state: "show"
-        };
-      }
-      return img;
-    })
+    ...state.images.map((img) =>
+      img.uniqueId === uniqueId
+        ? {
+            ...img,
+            state: "show"
+          }
+        : img
+    )
   ]
 });
 const actionWrong = (state: GridState) => state;
@@ -49,8 +48,7 @@ function gridReducer(state: GridState, action: ReducerDispatch) {
     wrong: actionWrong,
     correct: actionCorrect
   };
-  const test = actions[action.type](state, action);
-  console.log(test);
-  return test;
+  return actions[action.type](state, action);
 }
+
 export { dispatchCardFlip, dispatchWrong, dispatchCorrect, gridReducer };
