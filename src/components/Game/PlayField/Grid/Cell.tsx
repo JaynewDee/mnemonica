@@ -8,7 +8,7 @@ const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
   const handleEventDispatch = (e: any) => {
     gridDispatch(dispatchGuess(e.target.id, e.target.dataset.unique));
   };
-
+  const isVisible = () => data.state === "show" || data.state === "solved";
   return (
     <div className="cell-container">
       <button
@@ -30,7 +30,7 @@ const Cell: React.FC<CellTypes> = ({ data, gridDispatch }) => {
         ref={cardRef}
         onClick={handleEventDispatch}
       >
-        {data.state === "show" ? (
+        {isVisible() ? (
           data.image({ size: "23%", pointerEvents: "none" })
         ) : (
           <></>

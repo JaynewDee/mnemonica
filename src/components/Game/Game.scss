@@ -28,6 +28,9 @@
         border: none;
         transition: all 0.17s;
       }
+      .cell-btn-show {
+        pointer-events: none;
+      }
       .cell-btn-hidden {
         background-color: black;
         color: black;
