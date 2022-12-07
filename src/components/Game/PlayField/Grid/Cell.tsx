@@ -1,9 +1,7 @@
-import React, { createRef, SyntheticEvent, useRef } from "react";
-import { IconType } from "react-icons";
-import { Memory } from "../../data/L1";
+import React, { createRef, SyntheticEvent } from "react";
 import { CellTypes } from "./type";
 
-const Cell: React.FC<CellTypes> = ({ data }: { data: Memory }) => {
+const Cell: React.FC<CellTypes> = ({ data }) => {
   const cardRef = createRef<any>();
   const { id, uniqueId } = data;
   const flipCard = (e: SyntheticEvent) => {
