@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Cell from "./Cell";
 import { IconContext } from "react-icons";
 import { gridSize } from "../../../../utils/memories";
@@ -17,7 +17,7 @@ interface GridProps {
 }
 const TileGrid: React.FC<GridProps> = ({ isPaused }) => {
   const [grid, dispatch] = useGridReducer(L1.images);
-
+  const [styleState, setStyleState] = useState({});
   const dimension = `repeat(${gridSize(grid.images.length)}, 1fr)`;
   const containerStyles = {
     gridTemplateColumns: dimension,
@@ -33,6 +33,7 @@ const TileGrid: React.FC<GridProps> = ({ isPaused }) => {
         <article style={containerStyles} className="grid-container">
           {grid.images.map((item: Memory) => (
             <Cell
+              styles={styleState}
               key={item.uniqueId}
               data={item}
               gridDispatch={dispatch}

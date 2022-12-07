@@ -4,4 +4,5 @@ export interface CellTypes {
   data: Memory;
   gridDispatch: Dispatch<any>;
   turn: number;
+  styles: any;
 }

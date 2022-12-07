@@ -13,15 +13,19 @@ const dispatchGuess = (id: string, uniqueId: string): ReducerDispatch => ({
   id: id,
   uniqueId: uniqueId
 });
+
 const checkSolved = (images: Memory[]): number =>
   images.filter((img) => img.state === "show").length;
+
 const actionCardFlip = (
   state: GridState,
   dispatch: ReducerDispatch
 ): GridState => {
   const { turn, images, previousId, previousUnique } = state;
   const { id, uniqueId } = dispatch;
-  if (previousUnique === uniqueId) return state;
+  if (previousUnique === uniqueId) {
+    return { ...state, previousId: id, previousUnique: uniqueId };
+  }
   if (checkSolved(images) === images.length)
     return { ...state, turn: "solved" };
   if (turn === 1) {
