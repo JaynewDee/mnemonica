@@ -1,5 +1,12 @@
 @use "./Menu/Menu.scss";
 
+h3 {
+  text-align: right;
+  margin-bottom: auto;
+}
+h3 + button {
+  margin: 0 0 auto auto;
+}
 .game-container {
   display: flex;
   flex-flow: column nowrap;

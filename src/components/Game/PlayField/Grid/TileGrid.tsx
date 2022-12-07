@@ -37,6 +37,7 @@ const TileGrid: React.FC<GridProps> = ({ isPaused }) => {
         value={{ color: "rgba(170,0,0, .75)", size: "3rem" }}
       >
         {isSolved ? <h3>SOLVED</h3> : <></>}
+        <button>PROCEED {">"}</button>
         <article style={containerStyles} className="grid-container">
           {grid.images.map((item: Memory) => (
             <Cell
