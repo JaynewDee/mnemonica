@@ -14,9 +14,6 @@ const dispatchGuess = (id: string, uniqueId: string): ReducerDispatch => ({
   uniqueId: uniqueId
 });
 
-const checkSolved = (images: Memory[]): number =>
-  images.filter((img) => img.state === "show").length;
-
 const actionCardFlip = (
   state: GridState,
   dispatch: ReducerDispatch
@@ -26,10 +23,10 @@ const actionCardFlip = (
   if (previousUnique === uniqueId) {
     return { ...state, turn: 2, previousId: id, previousUnique: uniqueId };
   }
-  if (checkSolved(images) === images.length)
-    return { ...state, turn: "solved" };
+
   if (turn === 1) {
     return {
+      ...state,
       images: images.map((img) =>
         img.uniqueId === uniqueId
           ? {
@@ -50,10 +47,12 @@ const actionCardFlip = (
         ),
         turn: 1,
         previousId: undefined,
-        previousUnique: undefined
+        previousUnique: undefined,
+        solved: state.solved + 1
       };
     } else
       return {
+        ...state,
         images: images.map((img) =>
           img.id === previousId ? { ...img, state: "hidden" } : img
         ),
@@ -76,7 +75,7 @@ const useGridReducer = (images: Memory[]) => {
     return actions[type](state, { id, uniqueId, state });
   }
 
-  return useReducer(gridReducer, { images: images, turn: 1 });
+  return useReducer(gridReducer, { images: images, turn: 1, solved: 0 });
 };
 
 export { dispatchGuess, useGridReducer };

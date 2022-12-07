@@ -11,12 +11,14 @@ export interface GridState {
   turn: number | "solved";
   previousId: string | undefined;
   previousUnique: string | undefined;
+  solved: number;
 }
 interface GridProps {
   isPaused: boolean;
 }
 const TileGrid: React.FC<GridProps> = ({ isPaused }) => {
   const [grid, dispatch] = useGridReducer(L1.images);
+  const [isSolved, setIsSolved] = useState(false);
   const [styleState, setStyleState] = useState({});
   const dimension = `repeat(${gridSize(grid.images.length)}, 1fr)`;
   const containerStyles = {
@@ -25,11 +27,16 @@ const TileGrid: React.FC<GridProps> = ({ isPaused }) => {
     display: isPaused ? "none" : "grid"
   };
 
+  useEffect(() => {
+    console.log(grid.solved);
+    if (grid.solved >= grid.images.length / 2) setIsSolved(true);
+  }, [grid]);
   return (
     <>
       <IconContext.Provider
         value={{ color: "rgba(170,0,0, .75)", size: "3rem" }}
       >
+        {isSolved ? <h3>SOLVED</h3> : <></>}
         <article style={containerStyles} className="grid-container">
           {grid.images.map((item: Memory) => (
             <Cell
