@@ -54,20 +54,24 @@ const TileGrid: React.FC<GridProps> = ({ isPaused, score, setScore }) => {
         <header className="score-board">
           <Dock score={score} />
           {isSolved ? (
-            <div className="proceed">
-              <h3>SOLVED</h3>{" "}
-              <button
-                autoFocus={true}
-                onClick={(grid: GridState | ReducerDispatch | any) => {
-                  setIsSolved(false);
-                  dispatch(actionLevelUp(grid));
-                }}
-              >
-                PROCEED {">"}
-              </button>
-            </div>
+            <>
+              <h3>SOLVED</h3>
+              <div className="proceed">
+                <button
+                  autoFocus={true}
+                  onClick={(grid: GridState | ReducerDispatch | any) => {
+                    setIsSolved(false);
+                    dispatch(actionLevelUp(grid));
+                  }}
+                >
+                  PROCEED {">"}
+                </button>
+              </div>
+            </>
           ) : (
-            <></>
+            <button className="proceed" disabled>
+              PROCEED
+            </button>
           )}
         </header>
         <article style={containerStyles} className="grid-container">
