@@ -6,12 +6,10 @@ interface ScoreProps {
 const Score: React.FC<ScoreProps> = ({ currentScore }) => {
   return (
     <div className="score-container">
-      <div className="score-value">
-        <div className="decor-x">x</div>
-        {currentScore} <div className="decor-x">x</div>
-      </div>
-
+      <div className="score-value"></div>
+      <div className="decor-x">x</div>
       <div className="score-label">Score</div>
+      {currentScore} <div className="decor-x">x</div>
     </div>
   );
 };
