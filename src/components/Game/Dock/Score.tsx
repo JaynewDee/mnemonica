@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface ScoreProps {
-  score: number;
+  currentScore: number;
 }
-const Score: React.FC<ScoreProps> = ({ score }) => {
-  return <div>Score: {score}</div>;
+const Score: React.FC<ScoreProps> = ({ currentScore }) => {
+  return <div>Score: {currentScore}</div>;
 };
 
 export default Score;

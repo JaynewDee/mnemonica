@@ -1,19 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
-import { useGridReducer } from "../../utils/reducers";
-import Score from "./Dock/Score";
+import { useEffect, useState } from "react";
+import { useScoreState } from "../../utils/hooks";
 import "./Game.scss";
 import TileGrid from "./PlayField/Grid/TileGrid";
 const Game = () => {
   const [gameState, setGameState] = useState({
     level: [1, 1],
-    paused: true,
-    score: 0
+    paused: true
   });
 
-  const adjustScore = (payload: number) => {
-    setGameState({ ...gameState, score: gameState.score + payload });
-  };
-
+  const [scoreState, setScoreState]: any = useScoreState(0);
   const pause = () =>
     setGameState({
       ...gameState,
@@ -23,7 +18,8 @@ const Game = () => {
   const levelUp = () => {
     setGameState((prev) => ({
       ...gameState,
-      level: [(prev.level[0] += 1), prev.level[1]]
+      level: [(prev.level[0] += 1), prev.level[1]],
+      solved: 0
     }));
   };
 
@@ -39,7 +35,8 @@ const Game = () => {
         isPaused={gameState.paused}
         level={gameState.level}
         levelUp={levelUp}
-        updateScore={adjustScore}
+        score={scoreState}
+        setScore={setScoreState}
       />
     </div>
   );

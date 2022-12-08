@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useReducer,
-  useState
-} from "react";
+import { useReducer } from "react";
 import { Memory } from "../components/Game/data/L1";
 import { L2 } from "../components/Game/data/L2";
 import { GridState } from "../components/Game/PlayField/Grid/TileGrid";
@@ -14,21 +8,15 @@ export interface ReducerDispatch {
   type: string;
   id: string;
   uniqueId: string;
-  updateScore: Dispatch<SetStateAction<number>>;
 }
 
-const dispatchGuess = (
-  id: string,
-  uniqueId: string,
-  updateScore: Dispatch<SetStateAction<number>>
-): ReducerDispatch => ({
+const dispatchGuess = (id: string, uniqueId: string): ReducerDispatch => ({
   type: "guess",
-  id: id,
-  uniqueId: uniqueId,
-  updateScore: updateScore
+  id,
+  uniqueId
 });
 
-const actionLevelUp = (state: GridState) => ({
+const actionLevelUp = (state: any): any => ({
   ...state,
   images: shuffle(L2.images),
   solved: 0,
@@ -42,20 +30,21 @@ const claimPowerup = (images: Memory[]) =>
   images.map((img) =>
     img.id === "powerup" ? { ...img, state: "claimed" } : img
   );
-const actionCardFlip = (state: GridState, dispatch: any): GridState => {
+const actionCardFlip = (
+  state: GridState,
+  dispatch: ReducerDispatch
+): GridState => {
   const { turn, images, previousId, previousUnique } = state;
   const { id, uniqueId } = dispatch;
   if (id === "powerup") {
     return {
       ...state,
-      images: claimPowerup(images),
-      score: state.score * 2
+      images: claimPowerup(images)
     };
   }
   if (previousUnique === uniqueId) {
     return { ...state, turn: 2, previousId: id, previousUnique: uniqueId };
   }
-
   if (turn === 1) {
     return {
       ...state,
@@ -94,16 +83,20 @@ const actionCardFlip = (state: GridState, dispatch: any): GridState => {
         previousUnique: undefined
       };
   }
+
   return state;
 };
 
 const useGridReducer = (images: Memory[]) => {
-  function gridReducer(state: GridState, { type, id, uniqueId }: any) {
+  function gridReducer(
+    state: GridState,
+    { type, id, uniqueId }: ReducerDispatch
+  ) {
     const actions: any = {
       guess: actionCardFlip,
       updateGrid: actionLevelUp
     };
-    return actions[type](state, { id, uniqueId, state });
+    return actions[type](state, { id, uniqueId });
   }
 
   return useReducer(gridReducer, {

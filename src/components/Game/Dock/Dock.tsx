@@ -1,7 +1,11 @@
-import React from "react";
+import Score from "./Score";
 
-const Dock = () => {
-  return <div>Dock</div>;
+const Dock = ({ score }: { score: number }) => {
+  return (
+    <div>
+      <Score currentScore={score} />
+    </div>
+  );
 };
 
 export default Dock;

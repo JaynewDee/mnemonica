@@ -6,12 +6,12 @@ import { L1, Memory } from "../../data/L1";
 import {
   actionLevelUp,
   ReducerDispatch,
-  useGridReducer,
-  useLvlReducer
+  useGridReducer
 } from "../../../../utils/reducers";
 import Menu from "../../Menu/Menu";
 import { isVisible } from "./Cell";
-import Score from "../../Dock/Score";
+import Dock from "../../Dock/Dock";
+
 export interface GridState {
   images: Memory[];
   turn?: number | "solved";
@@ -24,17 +24,12 @@ interface GridProps {
   isPaused: boolean;
   level: number[];
   levelUp: Dispatch<SetStateAction<number[]>>;
-  updateScore: any;
-  // setIsSolved: Dispatch<SetStateAction<boolean>>;
   isSolved?: boolean;
+  score: number;
+  setScore: Dispatch<SetStateAction<number>>;
 }
 
-const TileGrid: React.FC<GridProps> = ({
-  isPaused,
-  level,
-  updateScore,
-  levelUp
-}) => {
+const TileGrid: React.FC<GridProps> = ({ isPaused, score, setScore }) => {
   const [grid, dispatch] = useGridReducer(L1.images);
   const dimension = `repeat(${gridSize(grid.images.length)}, 1fr)`;
   const containerStyles = {
@@ -43,32 +38,29 @@ const TileGrid: React.FC<GridProps> = ({
     display: isPaused ? "none" : "grid"
   };
   const [isSolved, setIsSolved] = useState(false);
-
   useEffect(() => {
     const numSolved = grid.images.filter((img: Memory) =>
       isVisible(img.state)
     ).length;
     if (numSolved >= grid.images.length) {
       setIsSolved(true);
-      levelUp([(level[0] += 1), 1]);
     }
-  }, [grid]);
-  const proceed = (grid: GridState) => {
-    return dispatch(actionLevelUp(grid));
-  };
+  }, [grid, setIsSolved]);
+
   return (
     <>
       <IconContext.Provider value={{ color: "rgba(170,0,0, .75)" }}>
         <header className="score-board">
-          <Score score={10} />
+          <Dock score={score} />
           {isSolved ? (
             <div className="proceed">
               <h3>SOLVED</h3>{" "}
               <button
                 autoFocus={true}
-                onClick={(grid: GridState | ReducerDispatch | any) =>
-                  dispatch(actionLevelUp(grid))
-                }
+                onClick={(grid: GridState | ReducerDispatch | any) => {
+                  setIsSolved(false);
+                  dispatch(actionLevelUp(grid));
+                }}
               >
                 PROCEED {">"}
               </button>
@@ -81,10 +73,12 @@ const TileGrid: React.FC<GridProps> = ({
           {grid.images.map((item: Memory) => (
             <Cell
               key={item.uniqueId}
+              previousId={grid.previousId}
               data={item}
               gridDispatch={dispatch}
               turn={grid.turn}
-              updateScore={updateScore}
+              score={score}
+              setScore={setScore}
             />
           ))}
         </article>

@@ -1,13 +1,15 @@
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useEffect } from "react";
 import { dispatchGuess } from "../../../../utils/reducers";
 import { Dispatch } from "react";
 import { Memory } from "../../data/L1";
 
 export interface CellTypes {
   data: Memory;
+  previousId: string;
   gridDispatch: Dispatch<any>;
   turn: number;
-  updateScore: Dispatch<SetStateAction<number>>;
+  score: number;
+  setScore: Dispatch<SetStateAction<any>>;
 }
 
 export const isVisible = (dataState: string) =>
@@ -15,15 +17,20 @@ export const isVisible = (dataState: string) =>
 
 const Cell: React.FC<CellTypes> = ({
   data,
+  turn,
   gridDispatch,
-  updateScore,
-  turn
+  score,
+  setScore,
+  previousId
 }) => {
   const { id, uniqueId } = data;
   const handleEventDispatch = (e: any) => {
-    gridDispatch(
-      dispatchGuess(e.target.id, e.target.dataset.unique, updateScore)
-    );
+    gridDispatch(dispatchGuess(e.target.id, e.target.dataset.unique));
+    if (turn === 2) {
+      if (e.target.id === previousId) {
+        setScore((prev: number) => prev + 50);
+      } else setScore((prev: number) => (prev -= 10));
+    }
   };
 
   return (
