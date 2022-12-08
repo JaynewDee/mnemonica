@@ -31,6 +31,9 @@ const Cell: React.FC<CellTypes> = ({
         setScore((prev: number) => prev + 50);
       } else setScore((prev: number) => (prev -= 10));
     }
+    if (data.uniqueId === "doubleScore") {
+      setScore((prev: number) => (prev += 250));
+    }
   };
 
   return (
