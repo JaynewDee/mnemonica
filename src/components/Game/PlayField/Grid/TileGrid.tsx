@@ -38,6 +38,7 @@ const TileGrid: React.FC<GridProps> = ({ isPaused, score, setScore }) => {
     display: isPaused ? "none" : "grid"
   };
   const [isSolved, setIsSolved] = useState(false);
+
   useEffect(() => {
     const numSolved = grid.images.filter((img: Memory) =>
       isVisible(img.state)

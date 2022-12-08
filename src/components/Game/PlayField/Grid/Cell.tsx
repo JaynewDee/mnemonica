@@ -29,7 +29,12 @@ const Cell: React.FC<CellTypes> = ({
     if (turn === 2) {
       if (e.target.id === previousId) {
         setScore((prev: number) => prev + 50);
-      } else setScore((prev: number) => (prev -= 10));
+      } else
+        setScore((prev: number) => {
+          if (prev - 10 <= 0) {
+            return 0;
+          } else return (prev -= 10);
+        });
     }
     if (data.uniqueId === "doubleScore") {
       setScore((prev: number) => (prev += 250));
