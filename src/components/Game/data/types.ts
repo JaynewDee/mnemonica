@@ -11,13 +11,13 @@ interface Special {
 }
 type PowerUpType = MemoryType & Special;
 
-type CellType = MemoryType | PowerUpType;
+type TileType = MemoryType | PowerUpType;
 
 interface StoryType {
   id: string;
   name: string;
-  images: MemoryType[];
+  tiles: MemoryType[];
   events: string[];
 }
 
-export { MemoryType, PowerUpType };
+export { MemoryType, PowerUpType, StoryType, TileType };
