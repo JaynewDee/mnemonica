@@ -1,7 +1,7 @@
 import React, { SetStateAction } from "react";
 import { dispatchGuess } from "../../../../utils/reducers";
 import { Dispatch } from "react";
-import { Memory } from "../../data/L1";
+import { Memory } from "../../data/types";
 
 export interface CellTypes {
   data: Memory;
@@ -35,7 +35,7 @@ const Cell: React.FC<CellTypes> = ({
           } else return (prev -= 10);
         });
     }
-    if (data.uniqueId === "doubleScore") {
+    if (data.uniqueId === "doubleScore" || data.uniqueId === "doubleScore2") {
       setScore((prev: number) => (prev += 250));
     }
   };

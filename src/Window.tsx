@@ -14,14 +14,6 @@ const Window = () => {
     }
   });
 
-  // const setSize = (size: [number, number]) =>
-  //   setWindowState((prev) => {
-  //     return {
-  //       ...prev,
-  //       windowSize: size
-  //     };
-  //   });
-
   const pause = (displayState: string) => {
     setWindowState(() => {
       return {

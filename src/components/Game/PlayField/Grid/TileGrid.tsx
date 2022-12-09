@@ -2,7 +2,8 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Cell from "./Cell";
 import { IconContext } from "react-icons";
 import { gridSize } from "../../../../utils/memories";
-import { L1, Memory } from "../../data/L1";
+import { L1 } from "../../data";
+import { Memory } from "../../data/types";
 import {
   actionLevelUp,
   ReducerDispatch,
