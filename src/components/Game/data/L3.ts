@@ -35,20 +35,6 @@ const memoriesL3: Memory[] = [
     memory: "fox"
   },
   {
-    id: `1`,
-    uniqueId: `43`,
-    image: GiHummingbird,
-    state: "hidden",
-    memory: "hummingbird"
-  },
-  {
-    id: `2`,
-    uniqueId: `44`,
-    image: GiFox,
-    state: "hidden",
-    memory: "fox"
-  },
-  {
     id: `3`,
     uniqueId: `45`,
     image: GiBigEgg,

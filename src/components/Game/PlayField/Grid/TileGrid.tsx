@@ -64,7 +64,7 @@ const TileGrid: React.FC<GridProps> = ({ isPaused, score, setScore }) => {
                     dispatch(actionLevelUp(grid));
                   }}
                 >
-                  PROCEED {">"}
+                  PROCEED
                 </button>
               </div>
             </>

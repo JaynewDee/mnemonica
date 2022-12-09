@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect } from "react";
+import React, { SetStateAction } from "react";
 import { dispatchGuess } from "../../../../utils/reducers";
 import { Dispatch } from "react";
 import { Memory } from "../../data/L1";
@@ -19,7 +19,6 @@ const Cell: React.FC<CellTypes> = ({
   data,
   turn,
   gridDispatch,
-  score,
   setScore,
   previousId
 }) => {
