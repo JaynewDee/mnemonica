@@ -6,7 +6,7 @@ const menuRoot = document.getElementById("menu-root");
 const Menu = () => {
   useEffect(() => {
     const onKeyDown = (e: any) =>
-      e.key === "Escape" ? window.location.reload() : console.log(e.key);
+      e.key === "Escape" ? window.location.reload() : false;
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   });

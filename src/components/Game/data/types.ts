@@ -2,15 +2,14 @@ import { IconType } from "react-icons";
 
 type MemoryType = {
   id: string;
-  uniqueId: string;
   image: IconType;
+  uniqueId: string;
   state: string;
 };
-interface Special {
+type Special = {
   special: boolean;
-}
+};
 type PowerUpType = MemoryType & Special;
-
 type TileType = MemoryType | PowerUpType;
 
 interface StoryType {

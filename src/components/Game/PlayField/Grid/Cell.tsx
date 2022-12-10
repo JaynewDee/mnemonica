@@ -1,10 +1,10 @@
 import React, { SetStateAction } from "react";
 import { dispatchGuess } from "../../../../utils/reducers";
 import { Dispatch } from "react";
-import { Memory } from "../../data/types";
+import { MemoryType } from "../../data/types";
 
 export interface CellTypes {
-  data: Memory;
+  data: MemoryType;
   previousId: string;
   gridDispatch: Dispatch<any>;
   turn: number;
@@ -22,7 +22,6 @@ const Cell: React.FC<CellTypes> = ({
   setScore,
   previousId
 }) => {
-  const { id, uniqueId } = data;
   const handleEventDispatch = (e: any) => {
     gridDispatch(dispatchGuess(e.target.id, e.target.dataset.unique));
     if (turn === 2) {
@@ -40,13 +39,14 @@ const Cell: React.FC<CellTypes> = ({
     }
   };
 
+  const { id, uniqueId, state } = data;
   return (
     <div className="cell-container">
       <button
         id={id}
         data-unique={uniqueId}
-        data-state={data.state}
-        className={data.state}
+        data-state={state}
+        className={state}
         onClick={handleEventDispatch}
       >
         {isVisible(data.state) ? (

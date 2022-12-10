@@ -1,7 +1,7 @@
-import { Memory } from "../../data/L1";
 import { Dispatch } from "react";
+import { MemoryType } from "../../data/types";
 export interface CellTypes {
-  data: Memory;
+  data: MemoryType;
   gridDispatch: Dispatch<any>;
   turn: number;
 }

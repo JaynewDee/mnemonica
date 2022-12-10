@@ -2,8 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Cell from "./Cell";
 import { IconContext } from "react-icons";
 import { gridSize } from "../../../../utils/memories";
-import { L1 } from "../../data";
-import { Memory } from "../../data/types";
+import { MemoryType } from "../../data/types";
 import {
   actionLevelUp,
   ReducerDispatch,
@@ -12,9 +11,10 @@ import {
 import Menu from "../../Menu/Menu";
 import { isVisible } from "./Cell";
 import Dock from "../../Dock/Dock";
+import { LVL1 } from "../../data/factory";
 
 export interface GridState {
-  images: Memory[];
+  images: MemoryType[];
   turn?: number | "solved";
   previousId?: string | undefined;
   previousUnique?: string | undefined;
@@ -31,7 +31,8 @@ interface GridProps {
 }
 
 const TileGrid: React.FC<GridProps> = ({ isPaused, score, setScore }) => {
-  const [grid, dispatch] = useGridReducer(L1.images);
+  const [grid, dispatch] = useGridReducer(LVL1.story.tiles);
+
   const dimension = `repeat(${gridSize(grid.images.length)}, 1fr)`;
   const containerStyles = {
     gridTemplateColumns: dimension,
@@ -41,7 +42,7 @@ const TileGrid: React.FC<GridProps> = ({ isPaused, score, setScore }) => {
   const [isSolved, setIsSolved] = useState(false);
 
   useEffect(() => {
-    const numSolved = grid.images.filter((img: Memory) =>
+    const numSolved = grid.images.filter((img: MemoryType) =>
       isVisible(img.state)
     ).length;
     if (numSolved >= grid.images.length) {
@@ -76,7 +77,7 @@ const TileGrid: React.FC<GridProps> = ({ isPaused, score, setScore }) => {
           )}
         </header>
         <article style={containerStyles} className="grid-container">
-          {grid.images.map((item: Memory) => (
+          {grid.images.map((item: MemoryType) => (
             <Cell
               key={item.uniqueId}
               previousId={grid.previousId}

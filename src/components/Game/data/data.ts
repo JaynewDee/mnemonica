@@ -1,3 +1,4 @@
+import { IconType } from "react-icons";
 import {
   GiHummingbird,
   GiFox,
@@ -9,7 +10,7 @@ import {
   GiAtom
 } from "react-icons/gi";
 
-export const memories = [
+export const memoriesL1 = [
   {
     id: `1`,
     image: GiHummingbird
@@ -40,7 +41,7 @@ export const memories = [
   }
 ];
 
-export const powerups = [
+export const powerupsL1 = [
   {
     id: `powerup`,
     uniqueId: `doubleScore`,

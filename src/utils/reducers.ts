@@ -1,9 +1,8 @@
 import { useReducer } from "react";
-import { Memory } from "../components/Game/data/L1";
-import { L2 } from "../components/Game/data/L2";
-import { GridState } from "../components/Game/PlayField/Grid/TileGrid";
-import { shuffle } from "./memories";
+import { MemoryType } from "../components/Game/data/types";
 
+import { GridState } from "../components/Game/PlayField/Grid/TileGrid";
+import { LVL1 } from "../components/Game/data/factory";
 export interface ReducerDispatch {
   type: string;
   id: string;
@@ -18,7 +17,7 @@ const dispatchGuess = (id: string, uniqueId: string): ReducerDispatch => ({
 
 const actionLevelUp = (state: any): any => ({
   ...state,
-  images: shuffle(L2.images),
+  images: LVL1.story.tiles.slice(),
   solved: 0,
   turn: 1,
   previousId: undefined,
@@ -26,7 +25,7 @@ const actionLevelUp = (state: any): any => ({
   type: "updateGrid"
 });
 
-const claimPowerup = (images: Memory[]) =>
+const claimPowerup = (images: MemoryType[]) =>
   images.map((img) =>
     img.id === "powerup" ? { ...img, state: "claimed" } : img
   );
@@ -83,11 +82,10 @@ const actionCardFlip = (
         previousUnique: undefined
       };
   }
-
   return state;
 };
 
-const useGridReducer = (images: Memory[]) => {
+const useGridReducer = (images: MemoryType[]) => {
   function gridReducer(
     state: GridState,
     { type, id, uniqueId }: ReducerDispatch
