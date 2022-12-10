@@ -11,7 +11,7 @@ import {
 import Menu from "../../Menu/Menu";
 import { isVisible } from "./Cell";
 import Dock from "../../Dock/Dock";
-import { LVL1 } from "../../data/factory";
+import { LVL3 } from "../../data/factory";
 
 export interface GridState {
   images: MemoryType[];
@@ -31,7 +31,7 @@ interface GridProps {
 }
 
 const TileGrid: React.FC<GridProps> = ({ isPaused, score, setScore }) => {
-  const [grid, dispatch] = useGridReducer(LVL1.story.tiles);
+  const [grid, dispatch] = useGridReducer(LVL3.story.tiles);
 
   const dimension = `repeat(${gridSize(grid.images.length)}, 1fr)`;
   const containerStyles = {

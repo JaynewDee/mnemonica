@@ -20,21 +20,22 @@ button:hover {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background-color: rgba(15, 15, 15, 0.9);
     color: white;
-    width: 13%;
-    padding: 1.5rem 1rem 2rem;
     border-radius: 3px;
+    pointer-events: none;
     .score-value {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 2.33rem;
+      font-size: 1.33rem;
+      margin-top: 1rem;
     }
     .score-dongles {
       display: flex;
-
+      margin: 0.5rem auto 0.75rem;
+      opacity: 0.8;
       .score-label {
         text-decoration: overline;
         font-size: 0.66rem;
@@ -48,11 +49,7 @@ button:hover {
     background-color: rgba(30, 30, 30, 0.85);
     color: white;
     border-radius: 3px;
-    width: 17%;
-    height: 3rem;
-    padding: 0 1rem;
-    align-self: flex-start;
-    font-size: 1rem;
+    font-size: 0.5rem;
   }
   .proceed:hover {
     cursor: pointer;
@@ -61,15 +58,11 @@ button:hover {
   .proceed[disabled] {
     opacity: 0.17;
     pointer-events: none;
-    letter-spacing: 0.33rem;
   }
   .proceed > button {
     border: none;
     background: none;
     color: white;
-    width: 100%;
-    height: 100%;
-    letter-spacing: 0.17rem;
     font-family: monospace;
   }
   .proceed > button::after {

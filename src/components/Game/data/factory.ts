@@ -65,17 +65,17 @@ const Level = (story: StoryType, level: number, difficulty: number) => ({
   difficulty
 });
 
-const LVL1TILES = assembleTiles(
+const LVL3TILES = assembleTiles(
   // @ts-ignore
   memoriesL1,
   powerupsL1
 );
-const Story1 = {
-  id: "1",
+const Story3 = {
+  id: "3",
   name: "Red Summer",
-  tiles: LVL1TILES,
+  tiles: LVL3TILES,
   events: ["", ""]
 };
-const LVL1 = Level(Story(Story1), 1, 1);
+const LVL3 = Level(Story(Story3), 3, 1);
 
-export { LVL1 };
+export { LVL3 };

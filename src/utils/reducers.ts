@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import { MemoryType } from "../components/Game/data/types";
 
 import { GridState } from "../components/Game/PlayField/Grid/TileGrid";
-import { LVL1 } from "../components/Game/data/factory";
+import { LVL3 } from "../components/Game/data/factory";
 export interface ReducerDispatch {
   type: string;
   id: string;
@@ -17,7 +17,7 @@ const dispatchGuess = (id: string, uniqueId: string): ReducerDispatch => ({
 
 const actionLevelUp = (state: any): any => ({
   ...state,
-  images: LVL1.story.tiles.slice(),
+  images: LVL3.story.tiles.slice(),
   solved: 0,
   turn: 1,
   previousId: undefined,
@@ -35,10 +35,20 @@ const actionCardFlip = (
 ): GridState => {
   const { turn, images, previousId, previousUnique } = state;
   const { id, uniqueId } = dispatch;
-  if (id === "powerup") {
+  if (uniqueId === "doubleScore") {
     return {
       ...state,
-      images: claimPowerup(images)
+      images: images.map((img) =>
+        img.uniqueId === "doubleScore" ? { ...img, state: "claimed" } : img
+      )
+    };
+  }
+  if (uniqueId === "doubleScore2") {
+    return {
+      ...state,
+      images: images.map((img) =>
+        img.uniqueId === "doubleScore2" ? { ...img, state: "claimed" } : img
+      )
     };
   }
   if (previousUnique === uniqueId) {
