@@ -70,6 +70,7 @@ const LVL3TILES = assembleTiles(
   memoriesL1,
   powerupsL1
 );
+
 const Story3 = {
   id: "3",
   name: "Red Summer",

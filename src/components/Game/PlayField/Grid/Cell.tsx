@@ -46,7 +46,7 @@ const Cell: React.FC<CellTypes> = ({
         id={id}
         data-unique={uniqueId}
         data-state={state}
-        className={state}
+        className={`${state}`}
         onClick={handleEventDispatch}
       >
         {isVisible(data.state) ? (

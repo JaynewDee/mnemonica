@@ -90,7 +90,6 @@ const TileGrid: React.FC<GridProps> = ({ isPaused, score, setScore }) => {
           ))}
         </article>
       </IconContext.Provider>
-      {isPaused ? <Menu /> : <></>}
     </>
   );
 };

@@ -1,4 +1,3 @@
-import { IconType } from "react-icons";
 import {
   GiHummingbird,
   GiFox,
