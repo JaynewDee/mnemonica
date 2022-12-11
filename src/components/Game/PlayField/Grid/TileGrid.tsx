@@ -1,10 +1,4 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState
-} from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import Cell, { isVisible } from "./Cell";
 import { IconContext } from "react-icons";
 import { MemoryType } from "../../data/types";
@@ -22,9 +16,7 @@ export interface GridState {
 interface GridProps {
   isPaused: boolean;
   level: number[];
-  levelUp: Dispatch<SetStateAction<number[]>>;
   liftScoreState: Dispatch<SetStateAction<number>>;
-  liftGridDispatch: Dispatch<SetStateAction<any>>;
   setSolved: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -32,8 +24,8 @@ const gridSize = (arrayLength: number) => String(Math.sqrt(arrayLength));
 
 const TileGrid: React.FC<GridProps> = ({
   isPaused,
+  level,
   liftScoreState,
-  liftGridDispatch,
   setSolved
 }) => {
   const [grid, dispatch] = useGridReducer(LVL3.story.tiles);
@@ -41,22 +33,27 @@ const TileGrid: React.FC<GridProps> = ({
     number,
     Dispatch<SetStateAction<number>>
   ] = useScoreState(0);
-  liftGridDispatch(dispatch);
   const dimension = `repeat(${gridSize(grid.images.length)}, 1fr)`;
   const containerStyles = {
     gridTemplateColumns: dimension,
     gridTemplateRows: dimension,
-    display: isPaused ? "none" : "grid"
+    display: "grid",
+    opacity: isPaused ? 0.07 : 1
   };
+
   useEffect(() => {
     const numSolved = grid.images.filter((img: MemoryType) =>
       isVisible(img.state)
     ).length;
-    if (numSolved >= grid.images.length) setSolved(true);
-  }, [grid, setSolved]);
+    if (numSolved >= grid.images.length) {
+      dispatch({ type: "levelUp", newLevel: level });
+      setSolved(true);
+    }
+  }, [dispatch, grid, level, setSolved]);
+
   useEffect(() => {
     liftScoreState(scoreState);
-  }, [grid, liftScoreState, scoreState]);
+  }, [dispatch, grid, liftScoreState, scoreState]);
 
   return (
     <>

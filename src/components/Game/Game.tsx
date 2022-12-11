@@ -26,11 +26,10 @@ const Game: React.FC<GameProps> = ({ setWindowSize }) => {
       paused: !gameState.paused
     });
 
-  const levelUp = () => {
+  const levelUp = (amount: number) => {
     setGameState((prev) => ({
       ...gameState,
-      level: [(prev.level[0] += 1), prev.level[1]],
-      solved: 0
+      level: [(prev.level[0] += amount), prev.level[1]]
     }));
   };
 
@@ -48,16 +47,14 @@ const Game: React.FC<GameProps> = ({ setWindowSize }) => {
       <div className="field-container">
         <div id="side-left">Side Left</div>
         <TileGrid
-          liftGridDispatch={setGridDispatch}
           liftScoreState={setScoreState}
           isPaused={gameState.paused}
           setSolved={setIsSolved}
           level={gameState.level}
-          levelUp={levelUp}
         />
         <div id="side-right">
           {" "}
-          <Proceed isSolved={isSolved} gridDispatch={gridDispatch} />
+          <Proceed isSolved={isSolved} levelUp={levelUp} />
         </div>
         {gameState.paused ? <Menu setWindowSize={setWindowSize} /> : <></>}
       </div>

@@ -8,6 +8,7 @@ export interface ReducerDispatch {
   type: string;
   id?: string;
   uniqueId?: string;
+  newLevel?: number[];
 }
 
 const dispatchGuess = (id: string, uniqueId: string): ReducerDispatch => ({
@@ -100,22 +101,31 @@ const actionCardFlip = (
   return state;
 };
 
+const tilesByLevel = (level: number) =>
+  level === 1
+    ? LVL3.story.tiles.slice()
+    : level === 2
+    ? LVL3.story.tiles.slice()
+    : LVL3.story.tiles.slice();
+
 const useGridReducer = (images: MemoryType[]) => {
-  const actionSetLevel = (state: any, newLevel: number[]) => ({
+  const actionLevelUp = (state: any, newLevel: number[]) => ({
     ...state,
-    level: newLevel
+    images: tilesByLevel(newLevel[0])
   });
   function gridReducer(
     state: GridState,
-    { type, id, uniqueId }: ReducerDispatch
+    { type, id, uniqueId, newLevel }: ReducerDispatch
   ) {
     const actions: any = {
       guess: actionCardFlip,
       updateGrid: actionLevelUp,
       resetWrong: actionResetWrong,
-      levelUp: actionSetLevel
+      levelUp: actionLevelUp
     };
-    return actions[type](state, { id, uniqueId });
+    return type === "levelUp"
+      ? actions[type](state, { newLevel })
+      : actions[type](state, { id, uniqueId });
   }
 
   return useReducer(gridReducer, {
@@ -129,7 +139,7 @@ const useGridReducer = (images: MemoryType[]) => {
 const useLvlReducer = (state: GridState, newLevel: number[]) => {
   function lvlReducer(state: GridState, newLevel: number[]) {
     const actions: any = {};
-    return actions["set"](state, newLevel);
+    return actions["set"](state);
   }
 
   return useReducer(lvlReducer, {

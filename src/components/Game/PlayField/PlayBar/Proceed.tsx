@@ -4,9 +4,9 @@ import { GridState } from "../Grid/TileGrid";
 
 interface ProceedProps {
   isSolved: boolean;
-  gridDispatch: any;
+  levelUp: Dispatch<SetStateAction<any>>;
 }
-const Proceed: React.FC<ProceedProps> = ({ isSolved, gridDispatch }) => {
+const Proceed: React.FC<ProceedProps> = ({ isSolved, levelUp }) => {
   return (
     <div className="proceed-container">
       {isSolved ? (
@@ -14,7 +14,7 @@ const Proceed: React.FC<ProceedProps> = ({ isSolved, gridDispatch }) => {
           className="proceed"
           autoFocus={true}
           onClick={() => {
-            gridDispatch({ type: "levelUp", id: null, uniqueId: null });
+            levelUp(1);
           }}
         >
           PROCEED

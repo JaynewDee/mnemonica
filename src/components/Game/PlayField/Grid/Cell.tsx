@@ -16,11 +16,7 @@ export interface CellTypes {
   setScore: Dispatch<SetStateAction<any>>;
 }
 
-export const isVisible = (dataState: string) =>
-  dataState === "shown" ||
-  dataState === "solved" ||
-  dataState === "claimed" ||
-  dataState === "animated";
+export const isVisible = (dataState: string) => dataState !== "hidden";
 
 const Cell: React.FC<CellTypes> = ({
   data,
