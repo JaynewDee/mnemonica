@@ -1,5 +1,8 @@
 @use "./Window.scss";
 
+:root {
+  font-size: 16px;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

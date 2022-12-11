@@ -2,6 +2,9 @@
 button:hover {
   cursor: pointer;
 }
+button {
+  font-family: monospace;
+}
 .decor-x {
   animation: x-spin 17s infinite;
   font-size: 0.33rem;
@@ -20,7 +23,6 @@ button:hover {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    justify-content: space-between;
     background-color: rgba(15, 15, 15, 0.9);
     color: white;
     border-radius: 3px;
@@ -42,33 +44,6 @@ button:hover {
       }
     }
   }
-  .proceed {
-    right: 13%;
-    top: 50%;
-    background: none;
-    background-color: rgba(30, 30, 30, 0.85);
-    color: white;
-    border-radius: 3px;
-    font-size: 0.5rem;
-  }
-  .proceed:hover {
-    cursor: pointer;
-    transform: scale(1.03);
-  }
-  .proceed[disabled] {
-    opacity: 0.17;
-    pointer-events: none;
-  }
-  .proceed > button {
-    border: none;
-    background: none;
-    color: white;
-    font-family: monospace;
-  }
-  .proceed > button::after {
-    content: " >";
-    font-size: 1rem;
-  }
 }
 h3 {
   text-align: right;
@@ -77,76 +52,115 @@ h3 {
 h3 + button {
   margin: 0 0 auto auto;
 }
+#side-left,
+#side-right {
+  margin: 0 auto;
+  width: 100%;
+}
 .game-container {
   display: flex;
   flex-flow: column nowrap;
   height: 90%;
   width: 90%;
-  justify-content: space-between;
-  border: 3px solid rgba(0, 0, 0, 0.329);
+  justify-content: space-evenly;
+  border: 3px solid rgba(10, 10, 10, 0.9);
   border-radius: 5px;
-  .grid-container {
-    width: 50%;
-    height: 50%;
-    display: grid;
-    gap: 13px;
-    margin: 0 auto 7%;
-    padding: 3rem;
-    border-radius: 0.33rem;
-    box-shadow: inset 0px 5px 8px 3px rgba(30, 30, 30, 0.17);
-    .cell-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 3px;
 
-      .shown,
-      .hidden,
-      .solved,
-      #powerup.claimed,
-      .animated {
-        width: 90%;
-        height: 90%;
+  .field-container {
+    display: grid;
+    height: 70%;
+    grid-template-columns: 20% 60% 20%;
+    .grid-container {
+      width: 70%;
+      height: 55%;
+      display: grid;
+      gap: 7px;
+      margin: auto;
+      padding: 3rem;
+      border-radius: 0.33rem;
+      box-shadow: inset 0px 5px 8px 3px rgba(30, 30, 30, 0.17);
+      .cell-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 3px;
-        transition: all 0.17s;
-      }
-      .shown,
-      .solved,
-      .claimed,
-      .animated {
-        pointer-events: none;
-      }
-      .hidden {
-        background-color: rgba(15, 15, 15, 0.9);
-        box-shadow: 0 0 8px 4px rgba(30, 30, 30, 0.17);
-        color: black;
-      }
-      .show:hover {
-        box-shadow: 0 0 12px 1px rgba(30, 30, 30, 0.171);
-        transform: scale(1.03);
-      }
-      .hidden:hover {
-        transform: scale(0.97);
-      }
-      .solved {
-        border: 2px solid green;
-      }
-      .claimed {
-        box-shadow: 0 0 16px 1px rgba(255, 217, 0, 0.292);
-        border: none;
-      }
-      .animated {
-        animation: wrong 0.66s;
-      }
-      #powerup.claimed::after {
-        // position: relative;
-        box-shadow: 0 0 16px 4px rgba(255, 217, 0, 0.292);
-        background: none;
-        border-radius: 50%;
-        border: 0px solid white;
-        animation: shine 1s infinite;
+        .shown,
+        .hidden,
+        .solved,
+        #powerup.claimed,
+        .animated {
+          width: 90%;
+          height: 90%;
+          border-radius: 3px;
+          transition: all 0.17s;
+        }
+        .shown,
+        .solved,
+        .claimed,
+        .animated {
+          pointer-events: none;
+        }
+        .hidden {
+          background-color: rgba(15, 15, 15, 0.9);
+          box-shadow: 0 0 8px 4px rgba(30, 30, 30, 0.17);
+          color: black;
+        }
+        .show:hover {
+          box-shadow: 0 0 12px 1px rgba(30, 30, 30, 0.171);
+          transform: scale(1.03);
+        }
+        .hidden:hover {
+          transform: scale(0.97);
+        }
+        .solved {
+          border: 2px solid green;
+        }
+        .claimed {
+          box-shadow: 0 0 16px 1px rgba(255, 217, 0, 0.292);
+          border: none;
+        }
+        .animated {
+          animation: wrong 0.66s;
+        }
+        #powerup.claimed::after {
+          // position: relative;
+          box-shadow: 0 0 16px 4px rgba(255, 217, 0, 0.292);
+          background: none;
+          border-radius: 50%;
+          border: 0px solid white;
+          animation: shine 1s infinite;
+        }
       }
     }
+  }
+  .proceed-container {
+    display: flex;
+    justify-content: center;
+    .proceed {
+      background: none;
+      background-color: rgba(255, 255, 255, 0.674);
+      color: rgba(35, 35, 35, 0.85);
+      border-radius: 3px;
+
+      padding: 0;
+      border: 3px solid rgba(10, 10, 10, 0.9);
+      transform: translateY(3px) scaleX(1.01);
+      transition: all 0.33s;
+      filter: saturate(0.9);
+    }
+    .proceed:hover {
+      cursor: pointer;
+      transform: translateY(5px) scaleX(1.01) scaleY(1.2);
+      background-color: rgba(20, 20, 20, 0.815);
+      color: white;
+    }
+    .proceed[disabled] {
+      opacity: 0.33;
+      pointer-events: none;
+    }
+  }
+  #play-bar {
+    height: 15%;
   }
 }
 

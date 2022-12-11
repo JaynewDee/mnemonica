@@ -101,6 +101,10 @@ const actionCardFlip = (
 };
 
 const useGridReducer = (images: MemoryType[]) => {
+  const actionSetLevel = (state: any, newLevel: number[]) => ({
+    ...state,
+    level: newLevel
+  });
   function gridReducer(
     state: GridState,
     { type, id, uniqueId }: ReducerDispatch
@@ -108,7 +112,8 @@ const useGridReducer = (images: MemoryType[]) => {
     const actions: any = {
       guess: actionCardFlip,
       updateGrid: actionLevelUp,
-      resetWrong: actionResetWrong
+      resetWrong: actionResetWrong,
+      levelUp: actionSetLevel
     };
     return actions[type](state, { id, uniqueId });
   }
@@ -122,14 +127,8 @@ const useGridReducer = (images: MemoryType[]) => {
 };
 
 const useLvlReducer = (state: GridState, newLevel: number[]) => {
-  const actionSetLevel = (state: any, newLevel: number[]) => ({
-    ...state,
-    level: newLevel
-  });
   function lvlReducer(state: GridState, newLevel: number[]) {
-    const actions: any = {
-      set: actionSetLevel
-    };
+    const actions: any = {};
     return actions["set"](state, newLevel);
   }
 
@@ -138,6 +137,7 @@ const useLvlReducer = (state: GridState, newLevel: number[]) => {
     level: newLevel
   });
 };
+
 export {
   dispatchGuess,
   actionLevelUp,

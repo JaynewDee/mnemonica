@@ -58,7 +58,7 @@ const Cell: React.FC<CellTypes> = ({
         onClick={handleEventDispatch}
       >
         {isVisible(data.state) ? (
-          data.image({ size: "33%", pointerEvents: "none" })
+          data.image({ size: "66%", pointerEvents: "none" })
         ) : (
           <></>
         )}
