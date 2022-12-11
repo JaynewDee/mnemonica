@@ -41,17 +41,6 @@ const PowerUp = ({
   state: "hidden"
 });
 
-const assembleMemories = (memories: MemoryType[]) =>
-  memories.map((m) => Memory(m));
-const assemblePowerups = (powerups: PowerUpType[]) =>
-  powerups.map((p) => PowerUp(p));
-
-const assembleTiles = (memories: MemoryType[], powerups: PowerUpType[]) => {
-  const doubled = assembleMemories(duplicate(memories));
-
-  return shuffle([...doubled, ...assemblePowerups(powerups)]);
-};
-
 const Story = ({ id, name, tiles, events }: StoryType) => ({
   id,
   name,
@@ -64,6 +53,17 @@ const Level = (story: StoryType, level: number, difficulty: number) => ({
   level,
   difficulty
 });
+
+const assembleMemories = (memories: MemoryType[]) =>
+  memories.map((m) => Memory(m));
+const assemblePowerups = (powerups: PowerUpType[]) =>
+  powerups.map((p) => PowerUp(p));
+
+const assembleTiles = (memories: MemoryType[], powerups: PowerUpType[]) => {
+  const doubled = assembleMemories(duplicate(memories));
+
+  return shuffle([...doubled, ...assemblePowerups(powerups)]);
+};
 
 const LVL3TILES = assembleTiles(
   // @ts-ignore

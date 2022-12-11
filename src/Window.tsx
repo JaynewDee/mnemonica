@@ -23,6 +23,15 @@ const Window = () => {
     });
   };
 
+  const setWindowSize = (size: number[]) => {
+    setWindowState(() => {
+      return {
+        ...windowState,
+        windowSize: [size[0], size[1]]
+      };
+    });
+  };
+
   return (
     <article
       style={{
@@ -31,7 +40,7 @@ const Window = () => {
       }}
       className="Window"
     >
-      {DisplaySwitch(windowState, pause)}
+      {DisplaySwitch(windowState, pause, setWindowSize)}
     </article>
   );
 };
