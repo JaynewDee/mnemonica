@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useScoreState } from "../../utils/hooks";
 import "./Game.scss";
 import Menu from "./Menu/Menu";
 import TileGrid from "./PlayField/Grid/TileGrid";
@@ -13,7 +12,6 @@ const Game: React.FC<GameProps> = ({ setWindowSize }) => {
     paused: true
   });
 
-  const [scoreState, setScoreState]: any = useScoreState(0);
   const pause = () =>
     setGameState({
       ...gameState,
@@ -40,8 +38,6 @@ const Game: React.FC<GameProps> = ({ setWindowSize }) => {
         isPaused={gameState.paused}
         level={gameState.level}
         levelUp={levelUp}
-        score={scoreState}
-        setScore={setScoreState}
       />
       {gameState.paused ? <Menu setWindowSize={setWindowSize} /> : <></>}
     </div>

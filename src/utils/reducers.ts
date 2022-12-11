@@ -3,10 +3,11 @@ import { MemoryType } from "../components/Game/data/types";
 
 import { GridState } from "../components/Game/PlayField/Grid/TileGrid";
 import { LVL3 } from "../components/Game/data/factory";
+
 export interface ReducerDispatch {
   type: string;
-  id: string;
-  uniqueId: string;
+  id?: string;
+  uniqueId?: string;
 }
 
 const dispatchGuess = (id: string, uniqueId: string): ReducerDispatch => ({
@@ -14,7 +15,13 @@ const dispatchGuess = (id: string, uniqueId: string): ReducerDispatch => ({
   id,
   uniqueId
 });
-
+const actionResetWrong = (state: any): any => ({
+  ...state,
+  images: state.images.map((img: any) =>
+    img.state === "animated" ? (img.state = "hidden") : img
+  ),
+  type: "resetWrong"
+});
 const actionLevelUp = (state: any): any => ({
   ...state,
   images: LVL3.story.tiles.slice(),
@@ -25,10 +32,6 @@ const actionLevelUp = (state: any): any => ({
   type: "updateGrid"
 });
 
-const claimPowerup = (images: MemoryType[]) =>
-  images.map((img) =>
-    img.id === "powerup" ? { ...img, state: "claimed" } : img
-  );
 const actionCardFlip = (
   state: GridState,
   dispatch: ReducerDispatch
@@ -61,7 +64,7 @@ const actionCardFlip = (
         img.uniqueId === uniqueId
           ? {
               ...img,
-              state: "show"
+              state: "shown"
             }
           : img
       ),
@@ -85,7 +88,9 @@ const actionCardFlip = (
       return {
         ...state,
         images: images.map((img) =>
-          img.id === previousId ? { ...img, state: "hidden" } : img
+          img.uniqueId === previousUnique || img.uniqueId === uniqueId
+            ? { ...img, state: "animated" }
+            : img
         ),
         turn: 1,
         previousId: undefined,
@@ -102,7 +107,8 @@ const useGridReducer = (images: MemoryType[]) => {
   ) {
     const actions: any = {
       guess: actionCardFlip,
-      updateGrid: actionLevelUp
+      updateGrid: actionLevelUp,
+      resetWrong: actionResetWrong
     };
     return actions[type](state, { id, uniqueId });
   }
@@ -132,4 +138,10 @@ const useLvlReducer = (state: GridState, newLevel: number[]) => {
     level: newLevel
   });
 };
-export { dispatchGuess, actionLevelUp, useGridReducer, useLvlReducer };
+export {
+  dispatchGuess,
+  actionLevelUp,
+  actionResetWrong,
+  useGridReducer,
+  useLvlReducer
+};

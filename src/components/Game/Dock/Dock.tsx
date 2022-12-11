@@ -1,9 +1,9 @@
 import Score from "./Score";
 
-const Dock = ({ score }: { score: number }) => {
+const Dock = ({ scoreState }: { scoreState: number }) => {
   return (
     <>
-      <Score currentScore={score} />
+      <Score currentScore={scoreState} />
     </>
   );
 };

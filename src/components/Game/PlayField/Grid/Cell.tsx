@@ -1,24 +1,32 @@
-import React, { SetStateAction } from "react";
-import { dispatchGuess } from "../../../../utils/reducers";
+import React, { SetStateAction, useState } from "react";
+import {
+  actionResetWrong,
+  dispatchGuess,
+  ReducerDispatch
+} from "../../../../utils/reducers";
 import { Dispatch } from "react";
 import { MemoryType } from "../../data/types";
 
 export interface CellTypes {
   data: MemoryType;
   previousId: string;
-  gridDispatch: Dispatch<any>;
+  gridDispatch: Dispatch<ReducerDispatch>;
+  gridState: any;
   turn: number;
-  score: number;
   setScore: Dispatch<SetStateAction<any>>;
 }
 
 export const isVisible = (dataState: string) =>
-  dataState === "show" || dataState === "solved" || dataState === "claimed";
+  dataState === "shown" ||
+  dataState === "solved" ||
+  dataState === "claimed" ||
+  dataState === "animated";
 
 const Cell: React.FC<CellTypes> = ({
   data,
   turn,
   gridDispatch,
+  gridState,
   setScore,
   previousId
 }) => {
@@ -27,12 +35,12 @@ const Cell: React.FC<CellTypes> = ({
     if (turn === 2) {
       if (e.target.id === previousId) {
         setScore((prev: number) => prev + 50);
-      } else
-        setScore((prev: number) => {
-          if (prev - 10 <= 0) {
-            return 0;
-          } else return (prev -= 10);
-        });
+      } else {
+        setScore((prev: number) => (prev - 10 <= 0 ? 0 : (prev -= 10)));
+        setTimeout(() => {
+          gridDispatch(actionResetWrong(gridState));
+        }, 1500);
+      }
     }
     if (data.uniqueId === "doubleScore" || data.uniqueId === "doubleScore2") {
       setScore((prev: number) => (prev += 250));
@@ -46,7 +54,7 @@ const Cell: React.FC<CellTypes> = ({
         id={id}
         data-unique={uniqueId}
         data-state={state}
-        className={`${state}`}
+        className={state}
         onClick={handleEventDispatch}
       >
         {isVisible(data.state) ? (

@@ -2,11 +2,12 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 const menuRoot = document.getElementById("menu-root");
-const SIZES = {
+
+const SIZES = Object.freeze({
   small: [900, 600],
   medium: [1280, 720],
   large: [1920, 1080]
-};
+});
 
 interface MenuProps {
   setWindowSize: Dispatch<SetStateAction<any>>;
